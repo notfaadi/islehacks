@@ -17,7 +17,7 @@ export const blogPosts: BlogPostFull[] = [
     date: 'Oct 8, 2026',
     readTime: '8 min read',
     featured: true,
-    tags: ['Setup'],
+    tags: ['Setup', 'Updates', 'Features'],
     body: [
       {
         type: 'p',
@@ -63,6 +63,7 @@ export const blogPosts: BlogPostFull[] = [
     desc: 'How player ESP presents nearby survivors with box, name, and distance information.',
     date: 'Oct 7, 2026',
     readTime: '6 min read',
+    tags: ['Guides', 'Setup'],
     body: [
       {
         type: 'p',
@@ -99,6 +100,7 @@ export const blogPosts: BlogPostFull[] = [
     desc: 'Dinosaur ESP, species labels, growth, and why creature information matters on Evrima.',
     date: 'Oct 6, 2026',
     readTime: '6 min read',
+    tags: ['Guides', 'Updates'],
     body: [
       {
         type: 'p',
@@ -134,6 +136,7 @@ export const blogPosts: BlogPostFull[] = [
     desc: 'What health ESP adds when you need fight-critical stats before committing to a hunt.',
     date: 'Oct 5, 2026',
     readTime: '5 min read',
+    tags: ['Updates', 'Setup', 'Guides'],
     body: [
       {
         type: 'p',
@@ -160,6 +163,7 @@ export const blogPosts: BlogPostFull[] = [
     desc: 'What aim assistance is listed for, and why it should stay optional after you check status.',
     date: 'Oct 4, 2026',
     readTime: '5 min read',
+    tags: ['Setup', 'Updates'],
     body: [
       {
         type: 'p',
@@ -186,6 +190,7 @@ export const blogPosts: BlogPostFull[] = [
     desc: 'Windows PC requirements, Evrima-only notes, and a conservative first-run configuration.',
     date: 'Oct 3, 2026',
     readTime: '7 min read',
+    tags: ['Guides', 'Updates'],
     body: [
       {
         type: 'p',
@@ -227,7 +232,7 @@ export const blogPosts: BlogPostFull[] = [
     desc: 'How radar complements ESP when you need nearby player and dinosaur cues.',
     date: 'Oct 2, 2026',
     readTime: '5 min read',
-    tags: ['Updates'],
+    tags: ['Updates', 'Guides'],
     body: [
       {
         type: 'p',
@@ -250,11 +255,11 @@ export const blogPosts: BlogPostFull[] = [
     tag: 'Guides',
     title: 'The Isle ESP terminology: player, dinosaur, and world overlays',
     slug: 'the-isle-esp-terminology',
-    image: '/images/gameplay/isle-forest-horn.png',
+    image: '/images/gameplay/isle-forest-species.png',
     desc: 'Plain-language definitions for player ESP, dinosaur ESP, health ESP, and resource markers.',
     date: 'Oct 1, 2026',
     readTime: '7 min read',
-    tags: ['Setup'],
+    tags: ['Setup', 'Features'],
     body: [
       {
         type: 'p',
@@ -296,6 +301,7 @@ export const blogPosts: BlogPostFull[] = [
     desc: 'What Easy Anti-Cheat means for The Isle Evrima and how to treat status after a patch.',
     date: 'Sep 30, 2026',
     readTime: '6 min read',
+    tags: ['Setup', 'Guides'],
     body: [
       {
         type: 'p',
@@ -332,7 +338,7 @@ export const blogPosts: BlogPostFull[] = [
     desc: 'Compare the $35 monthly plan and the $150 lifetime plan before checkout.',
     date: 'Sep 29, 2026',
     readTime: '4 min read',
-    tags: ['Updates'],
+    tags: ['Updates', 'Features'],
     body: [
       {
         type: 'p',
