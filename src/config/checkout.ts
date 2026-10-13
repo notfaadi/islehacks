@@ -42,10 +42,13 @@ export function resolveCheckoutHref(href: string): string {
   }
 
   if (
+    href.includes('%2Fproducts%2Fthe-isle-novaxware-cheats') ||
+    href.includes('/products/the-isle-novaxware-cheats') ||
     href.includes('%2Fproducts%2Fthe-isle-novaxware') ||
     href.includes('/products/the-isle-novaxware') ||
     href.includes('%2Fproducts%2Fthe-isle') ||
-    href.includes('/products/the-isle')
+    href.includes('/products/the-isle') ||
+    href.includes('zadeyo.com/go/FDI')
   ) {
     return checkoutPath('isle');
   }

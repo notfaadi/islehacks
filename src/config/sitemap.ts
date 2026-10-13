@@ -38,10 +38,21 @@ export function sitemapSerialize(item: SitemapItem): SitemapItem | undefined {
     path === '/blog/features/' ||
     path === '/blog/guides/' ||
     path === '/blog/setup/' ||
-    path === '/blog/updates/'
+    path === '/blog/updates/' ||
+    path === '/guides/' ||
+    path === '/intel/' ||
+    path === '/howto/' ||
+    path === '/updates/'
   ) {
     item.priority = 0.8;
     item.changefreq = 'weekly';
+    return item;
+  }
+
+  if (path.startsWith('/the-isle-') && path.endsWith('/')) {
+    item.priority = 0.7;
+    item.changefreq = 'monthly';
+    item.lastmod = blogLastmod.get(`/blog${path.slice(0, -1)}/`) ?? buildDate;
     return item;
   }
 

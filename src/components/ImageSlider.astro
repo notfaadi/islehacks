@@ -32,7 +32,7 @@ const imageWidths = isHero ? HERO_IMAGE_WIDTHS : undefined;
 <div
   class:list={[
     'relative w-full',
-    'rounded-xl border border-primary/30 bg-card/90 p-2 shadow-lg shadow-primary/15 ring-1 ring-primary/10',
+    'rounded-xl border border-border bg-card p-2 shadow-sm',
     desktopOnly && 'hidden lg:block',
   ]}
   id={id}
@@ -74,10 +74,10 @@ const imageWidths = isHero ? HERO_IMAGE_WIDTHS : undefined;
         </CarouselItem>
       ))}
     </CarouselContent>
-    {!isHero && images.length > 1 && (
+    {images.length > 1 && (
       <>
-        <CarouselPrevious class="left-2" />
-        <CarouselNext class="right-2" />
+        <CarouselPrevious class={isHero ? 'left-3 top-1/2 -translate-y-1/2' : 'left-2'} />
+        <CarouselNext class={isHero ? 'right-3 top-1/2 -translate-y-1/2' : 'right-2'} />
       </>
     )}
   </Carousel>

@@ -1,0 +1,27 @@
+---
+import BlogArticlePage from '../components/BlogArticlePage.astro';
+import ForumDiscussionPage from '../components/ForumDiscussionPage.astro';
+import { getBlogPost } from '../data/blog';
+import { getForumPost } from '../data/forum';
+import { getRootSeoSlugs } from '../config/seoSlugs';
+
+export function getStaticPaths() {
+  return getRootSeoSlugs().map((seoSlug) => ({ params: { seoSlug } }));
+}
+
+const slug = Astro.params.seoSlug!;
+const blogPost = getBlogPost(slug);
+const forumPost = getForumPost(slug);
+
+if (!blogPost && !forumPost) {
+  return Astro.redirect('/404/');
+}
+---
+
+{
+  blogPost ? (
+    <BlogArticlePage slug={slug} canonicalPath={`/${slug}/`} />
+  ) : (
+    <ForumDiscussionPage slug={slug} canonicalPath={`/${slug}/`} />
+  )
+}

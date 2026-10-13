@@ -16,12 +16,14 @@ import { Button } from '@/components/starwind/button';
 
 interface Props {
   tag?: string | 'all';
+  seoPath?: string;
+  canonicalPath?: string;
 }
 
-const { tag = 'all' } = Astro.props;
+const { tag = 'all', seoPath, canonicalPath } = Astro.props;
 const activeTag = tag === 'all' ? 'all' : tag;
 const path = activeTag === 'all' ? ROUTES.blog : blogTopicPath(activeTag);
-const seo = resolvePageSeo(path);
+const seo = resolvePageSeo(seoPath ?? path);
 const tags = getBlogTags();
 const { featured, grid } = getBlogListing(activeTag);
 const listingTitle = activeTag === 'all' ? t.blog.latestTitle : `${activeTag} articles`;
@@ -42,6 +44,8 @@ const filters = [{ label: t.blog.filterAll, value: 'all' as const }, ...tags.map
 <BaseLayout
   title={seo.title}
   description={seo.description}
+  keywords={seo.keywords}
+  canonicalPath={canonicalPath}
   jsonLd={[
     collectionPageSchema({
       name: listingTitle,

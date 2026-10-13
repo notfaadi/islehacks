@@ -12,6 +12,7 @@ const seo = resolvePageSeo('/privacy/');
 <BaseLayout
   title={seo.title}
   description={seo.description}
+  keywords={seo.keywords}
   jsonLd={[
     webPageSchema({
       name: content.title,

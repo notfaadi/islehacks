@@ -1,6 +1,7 @@
 import { t } from '../i18n';
 import { SITE_DOMAIN as INDEXNOW_HOST_NAME } from './site';
-import { getPageSeoEntry } from './pageSeo';
+import { getPageSeoEntry, normalizeSeoPath } from './pageSeo';
+import { DEFAULT_SITE_KEYWORDS, ROUTE_SEO, type RouteSeoEntry } from './routeSeo';
 
 export const SITE_ORIGIN = `https://${t.site.domain}`;
 
@@ -54,10 +55,21 @@ export function shareImageType(path: string): string {
   return 'image/jpeg';
 }
 
-export function resolvePageSeo(pathname: string): { title: string; description: string } {
-  const entry = getPageSeoEntry(pathname);
+export function getRouteSeoEntry(pathname: string): RouteSeoEntry | undefined {
+  return ROUTE_SEO[normalizeSeoPath(pathname)];
+}
+
+export function resolvePageSeo(pathname: string): RouteSeoEntry {
+  const path = normalizeSeoPath(pathname);
+  const route = ROUTE_SEO[path];
+  if (route) return route;
+  const entry = getPageSeoEntry(path);
   if (entry) return entry;
-  return { title: t.site.title, description: t.site.description };
+  return {
+    title: t.site.title,
+    description: t.site.description,
+    keywords: DEFAULT_SITE_KEYWORDS,
+  };
 }
 
 export function pageTitle(keyword: string, brand = t.site.name): string {

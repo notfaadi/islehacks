@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { buildSearchIndex } from '../../data/searchIndex';
+import { filterSearchIndex } from '../../scripts/site-search';
+import { resolvePageSeo } from '../../config/seo';
+import Icon from '../../components/icons/Icon.astro';
+import '../../styles/site-search.css';
+
+const q = (Astro.url.searchParams.get('q') ?? '').trim();
+const index = buildSearchIndex();
+const results = q ? filterSearchIndex(index, q, 48) : [];
+const seo = resolvePageSeo('/search/');
+const title = q ? `Search: ${q} | Isle Hacks` : seo.title;
+---
+
+<BaseLayout
+  title={title}
+  description={seo.description}
+  keywords={seo.keywords}
+  noindex={Boolean(q)}
+>
+  <section class="py-10 md:py-14">
+    <div class="mx-auto max-w-3xl px-5">
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Search</h1>
+      <p class="mt-2 text-sm text-muted-foreground">
+        Articles, forum threads, FAQ answers, and key pages for The Isle on Windows PC.
+      </p>
+
+      <form class="listing-search mt-8" action="/search/" method="get" role="search">
+        <Icon name="search" size={18} />
+        <input type="search" name="q" value={q} placeholder="Search Isle Hacks" aria-label="Search query" autofocus />
+      </form>
+
+      {
+        q && results.length === 0 && (
+          <p class="mt-8 text-muted-foreground">No results for “{q}”. Try different keywords.</p>
+        )
+      }
+
+      {
+        results.length > 0 && (
+          <ul class="mt-8 space-y-2">
+            {results.map((item) => (
+              <li>
+                <a href={item.href} class="site-search__result block">
+                  <span class="site-search__type">{item.type}</span>
+                  <span class="site-search__title">{item.title}</span>
+                  <span class="site-search__desc">{item.desc}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

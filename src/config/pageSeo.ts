@@ -12,7 +12,7 @@ export const PAGE_SEO: Record<string, PageSeoEntry> = {
   '/': {
     title: 'The Isle Hacks | Features, ESP and Radar',
     description:
-      'Explore The Isle hacks for Windows PC. Review features, ESP, radar, and compatibility before choosing a plan.',
+      'Explore The Isle hacks for Windows PC. Discover available gameplay features, configuration options, compatibility information, and current status before choosing a plan.',
   },
   '/features/': {
     title: 'The Isle Features | Isle Hacks',
@@ -80,9 +80,39 @@ export const PAGE_SEO: Record<string, PageSeoEntry> = {
       'Isle Hacks updates on The Isle Evrima patches, Easy Anti-Cheat changes, and current compatibility notes.',
   },
   '/forum/': {
-    title: 'The Isle Community Forum | Isle Hacks',
+    title: 'The Isle Hacks Forum 2026 | ESP Q&A',
     description:
-      'Discuss The Isle Evrima gameplay, ESP terminology, radar use, patch changes, and Windows PC setup with the Isle Hacks community.',
+      'Practical answers on The Isle ESP, radar, Easy Anti-Cheat patches, Windows PC setup, and Isle Hacks plans. Each discussion links back to a source guide.',
+  },
+  '/guides/': {
+    title: 'The Isle Guides | Isle Hacks',
+    description:
+      'Practical The Isle guides covering Evrima gameplay, ESP terminology, radar use, and how to review Isle Hacks before you buy.',
+  },
+  '/intel/': {
+    title: 'The Isle Feature Articles | Isle Hacks',
+    description:
+      'Read Isle Hacks articles about The Isle ESP, radar, aim assistance, and other listed features for Windows PC.',
+  },
+  '/howto/': {
+    title: 'The Isle Setup Articles | Isle Hacks',
+    description:
+      'Windows PC setup notes for Isle Hacks, including Evrima requirements, configuration order, and compatibility checks.',
+  },
+  '/updates/': {
+    title: 'The Isle Updates | Isle Hacks',
+    description:
+      'Isle Hacks updates on The Isle Evrima patches, Easy Anti-Cheat changes, and current compatibility notes.',
+  },
+  '/search/': {
+    title: 'Search Isle Hacks',
+    description:
+      'Search Isle Hacks articles, forum discussions, FAQ answers, and pages for The Isle on Windows PC.',
+  },
+  '/support/': {
+    title: 'The Isle Hacks Support | Isle Hacks',
+    description:
+      'Get support for Isle Hacks, including purchase assistance, access and delivery questions, configuration guidance, compatibility, and troubleshooting.',
   },
   '/forum/guidelines/': {
     title: 'Community Guidelines | Isle Hacks Forum',
@@ -92,17 +122,17 @@ export const PAGE_SEO: Record<string, PageSeoEntry> = {
   '/terms/': {
     title: 'Terms & Conditions | Isle Hacks',
     description:
-      'Purchase terms, license use, and refund policy for Isle Hacks products sold through islehacks.org.',
+      'Purchase terms, license use, and refund policy for Isle Hacks products sold through islehacks.com.',
   },
   '/privacy/': {
     title: 'Privacy Policy | Isle Hacks',
     description:
-      'How islehacks.org uses analytics, cookies, and contact data when you browse or request support.',
+      'How islehacks.com uses analytics, cookies, and contact data when you browse or request support.',
   },
   '/about/': {
     title: 'About Isle Hacks',
     description:
-      'What Isle Hacks publishes: The Isle features, plans, setup notes, and status information at islehacks.org.',
+      'What Isle Hacks publishes: The Isle features, plans, setup notes, and status information at islehacks.com.',
   },
 };
 

@@ -32,6 +32,14 @@ export const PATH_REDIRECTS = new Map([
   ['/products/dota-2-cheats/utilities/', '/store/'],
   ['/products/the-isle-hacks', '/store/'],
   ['/products/the-isle-hacks/', '/store/'],
+  ['/blog/guides/', '/guides/'],
+  ['/blog/features/', '/intel/'],
+  ['/blog/setup/', '/howto/'],
+  ['/blog/updates/', '/updates/'],
+  ['/guides', '/guides/'],
+  ['/intel', '/intel/'],
+  ['/howto', '/howto/'],
+  ['/updates', '/updates/'],
 ]);
 
 /** Paths that should not receive a forced trailing slash. */

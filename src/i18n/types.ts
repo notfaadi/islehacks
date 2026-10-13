@@ -105,6 +105,17 @@ export interface Translations {
     titleLine2: string;
     titleLine3: string;
     subtitle: string;
+    subtitleNote?: {
+      beforeFeatures: string;
+      featuresLink: string;
+      beforePlans: string;
+      plansLink: string;
+      beforeStatus: string;
+      statusLink: string;
+      beforeSetup: string;
+      setupLink: string;
+      afterSetup: string;
+    };
     ctaPrimary: string;
     ctaDiscord: string;
     modesLabel: string;

@@ -1,6 +1,6 @@
 /** Checkout destinations keyed by internal product id. */
 export const CHECKOUT_URLS = {
-  isle: 'https://zadeyo.com/go/RUSHBA?to=%2Fproducts%2Fthe-isle-novaxware',
+  isle: 'https://zadeyo.com/go/FDI?to=%2Fproducts%2Fthe-isle-novaxware-cheats',
 };
 
 /** Checkout paths → external product URLs (used by Node serve + Astro middleware). */

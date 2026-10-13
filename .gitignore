@@ -26,5 +26,6 @@ pnpm-debug.log*
 
 # local reference clones
 _ref-sync/
+_live-ref/
 _upstream-com/
 temp-check/

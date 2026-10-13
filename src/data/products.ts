@@ -321,6 +321,8 @@ export const heroSlides = slide(
   'gpForestAim',
   'gpEsp',
   'gpHorn',
+  'gpHealth',
+  'gpRadar',
 );
 
 export const productHub = {

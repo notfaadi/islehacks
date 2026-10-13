@@ -21,6 +21,8 @@ import JsonLd from '../components/JsonLd.astro';
 interface Props {
   title?: string;
   description?: string;
+  keywords?: string;
+  canonicalPath?: string;
   ogImage?: string;
   ogImageAlt?: string;
   ogType?: 'website' | 'article';
@@ -33,6 +35,8 @@ interface Props {
 const {
   title = t.site.title,
   description = t.site.description,
+  keywords,
+  canonicalPath,
   ogImage = DEFAULT_OG_IMAGE,
   ogImageAlt = title,
   ogType = 'website',
@@ -42,7 +46,7 @@ const {
   jsonLd,
 } = Astro.props;
 
-const canonical = canonicalUrl(Astro.url.pathname);
+const canonical = canonicalUrl(canonicalPath ?? Astro.url.pathname);
 const resolvedOgImage = shareImagePath(ogImage);
 const ogImageUrl = absoluteAssetUrl(resolvedOgImage);
 const ogImageMime = shareImageType(resolvedOgImage);
@@ -74,10 +78,11 @@ const robotsContent = noindex
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
     <meta name="author" content={t.site.name} />
     <meta name="robots" content={robotsContent} />
     <meta name="googlebot" content={robotsContent} />
-    <meta name="theme-color" content="#8B5CF6" />
+    <meta name="theme-color" content="#7F3DEE" />
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang="en" href={canonical} />
     <link rel="alternate" hreflang="x-default" href={canonical} />
@@ -149,7 +154,7 @@ const robotsContent = noindex
     <slot name="head" />
 
   </head>
-  <body class="min-h-screen bg-background text-foreground">
+  <body class="min-h-screen bg-background text-foreground dark:bg-transparent">
     <button type="button" class="skip-link" data-skip-to-main>{t.ui.skipLink}</button>
     <Header />
     <main id="main-content">

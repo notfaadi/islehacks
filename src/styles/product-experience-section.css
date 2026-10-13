@@ -4,6 +4,10 @@
   background: color-mix(in oklch, var(--muted) 22%, var(--background));
 }
 
+html.dark .product-experience {
+  background: transparent;
+}
+
 .product-experience__header {
   margin-inline: auto;
   max-width: 40rem;

@@ -1,4 +1,4 @@
-export const SITE_DOMAIN = 'islehacks.org';
+export const SITE_DOMAIN = 'islehacks.com';
 export const SITE_URL = `https://${SITE_DOMAIN}`;
 export const PRODUCT_BASE = '/store/';
 export const TITLE_PREFIX = 'The Isle Hacks';

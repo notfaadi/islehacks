@@ -7,14 +7,15 @@ const productBase = PRODUCT_BASE;
 export const en: Translations = {
   site: {
     name: 'Isle Hacks',
-    domain: 'islehacks.org',
+    domain: 'islehacks.com',
     title: 'The Isle Hacks | Features, ESP and Radar',
     description:
-      'Explore The Isle hacks for Windows PC. Review features, ESP, radar, and compatibility before choosing a plan.',
+      'Explore The Isle hacks for Windows PC. Discover available gameplay features, configuration options, compatibility information, and current status before choosing a plan.',
     discord: PRIMARY_CHECKOUT_PATH,
   },
   nav: [
-    { href: productBase, label: 'Products' },
+    { href: '/features/', label: 'Features' },
+    { href: productBase, label: 'Store' },
     { href: '/blog/', label: 'Blog' },
     { href: '/forum/', label: 'Forum' },
     { href: '/faq/', label: 'FAQ' },
@@ -27,7 +28,18 @@ export const en: Translations = {
     titleLine2: 'The Isle Hacks',
     titleLine3: 'Features, ESP and Radar',
     subtitle:
-      'Isle Hacks covers The Isle features for Windows PC, including player ESP, dinosaur ESP, health information, radar options, and aim assistance. Review compatibility and plans before checkout.',
+      'Isle Hacks documents The Isle hacks for Windows PC: player ESP, dinosaur ESP, health information, radar, and optional aim assistance. Read the listing, then check compatibility before you buy.',
+    subtitleNote: {
+      beforeFeatures: 'Start with the ',
+      featuresLink: 'features list',
+      beforePlans: ', compare ',
+      plansLink: 'monthly and lifetime plans',
+      beforeStatus: ', then check ',
+      statusLink: 'Easy Anti-Cheat status',
+      beforeSetup: ' and ',
+      setupLink: 'Windows PC setup',
+      afterSetup: ' before checkout.',
+    },
     ctaPrimary: 'View store',
     ctaDiscord: 'View plans',
     modesLabel: 'Supported focus',
@@ -41,7 +53,7 @@ export const en: Translations = {
   },
   features: {
     eyebrow: 'Features',
-    title: 'The Isle tools you can review before buying',
+    title: 'The Isle modules you can inspect before checkout',
     subtitle: 'Aim assistance, ESP, creature information, and radar options listed by the current product build.',
     items: [
       {
@@ -129,7 +141,7 @@ export const en: Translations = {
     eyebrow: 'Why us',
     title: 'A focused The Isle listing—not a multi-game catalog',
     subtitle:
-      'Isle Hacks is built around one game. Review features, plans, and status on islehacks.org before you buy.',
+      'Isle Hacks is built around one game. Review features, plans, and status on islehacks.com before you buy.',
     usLabel: 'Isle Hacks',
     otherLabel: 'Typical listing',
     rows: [
@@ -390,7 +402,7 @@ export const en: Translations = {
         num: '01',
         phase: 'Before purchase',
         title: 'Check current status',
-        desc: 'Read the status page on islehacks.org after any Evrima or Easy Anti-Cheat update.',
+        desc: 'Read the status page on islehacks.com after any Evrima or Easy Anti-Cheat update.',
       },
       {
         num: '02',
@@ -457,7 +469,7 @@ export const en: Translations = {
     ],
     ticketTitle: 'Include in your ticket',
     ticketItems: [
-      { title: 'Order email', desc: 'The address used at checkout on islehacks.org or through the checkout partner.' },
+      { title: 'Order email', desc: 'The address used at checkout on islehacks.com or through the checkout partner.' },
       { title: 'Platform', desc: 'Windows 10 or 11, plus whether you are on the Evrima branch.' },
       { title: 'Error detail', desc: 'Screenshot or exact message from the loader, Steam, or Easy Anti-Cheat.' },
     ],
@@ -470,7 +482,7 @@ export const en: Translations = {
       {
         num: '01',
         q: 'Where do I check if The Isle hacks are currently compatible?',
-        a: 'Use the status page on islehacks.org before purchase or launch, especially after an Evrima or Easy Anti-Cheat update.',
+        a: 'Use the status page on islehacks.com before purchase or launch, especially after an Evrima or Easy Anti-Cheat update.',
       },
       {
         num: '02',
@@ -500,7 +512,7 @@ export const en: Translations = {
     ],
   },
   footer: {
-    tagline: 'The Isle hacks — ESP, radar, and plans for Windows PC. islehacks.org',
+    tagline: 'The Isle hacks — ESP, radar, and plans for Windows PC. islehacks.com',
     explore: 'Explore',
     exploreLinks: [
       { href: '/store/', label: 'Products', ariaLabel: 'Products' },
@@ -519,7 +531,7 @@ export const en: Translations = {
     about: {
       title: 'About Isle Hacks',
       description:
-        'Isle Hacks publishes The Isle feature notes, plans, setup guidance, and status information at islehacks.org.',
+        'Isle Hacks publishes The Isle feature notes, plans, setup guidance, and status information at islehacks.com.',
       sections: [
         {
           heading: 'Who we are',
@@ -546,12 +558,12 @@ export const en: Translations = {
     privacy: {
       title: 'Privacy Policy',
       description:
-        'How Isle Hacks handles analytics, cookies, and contact data when you use islehacks.org.',
+        'How Isle Hacks handles analytics, cookies, and contact data when you use islehacks.com.',
       sections: [
         {
           heading: 'Information we collect',
           paragraphs: [
-            'We may collect standard web analytics such as page views, device type, browser, and approximate region through Google Analytics when enabled. Checkout and license delivery happen on external checkout pages—we do not store payment card data on islehacks.org.',
+            'We may collect standard web analytics such as page views, device type, browser, and approximate region through Google Analytics when enabled. Checkout and license delivery happen on external checkout pages—we do not store payment card data on islehacks.com.',
           ],
         },
         {
@@ -577,12 +589,12 @@ export const en: Translations = {
     terms: {
       title: 'Terms & Conditions',
       description:
-        'Purchase, license, refund, and use terms for Isle Hacks products and islehacks.org.',
+        'Purchase, license, refund, and use terms for Isle Hacks products and islehacks.com.',
       sections: [
         {
           heading: 'Agreement',
           paragraphs: [
-            'Last updated: October 2026. By using islehacks.org or completing checkout for any product listed here, you agree to these Terms & Conditions and our Privacy Policy.',
+            'Last updated: October 2026. By using islehacks.com or completing checkout for any product listed here, you agree to these Terms & Conditions and our Privacy Policy.',
           ],
         },
         {
@@ -595,7 +607,7 @@ export const en: Translations = {
         {
           heading: 'Checkout and delivery',
           paragraphs: [
-            'Payment and license delivery run on external checkout pages. islehacks.org does not process or store payment card numbers.',
+            'Payment and license delivery run on external checkout pages. islehacks.com does not process or store payment card numbers.',
             'After purchase, follow the setup instructions provided in the checkout flow before launching The Isle.',
           ],
         },
@@ -637,15 +649,15 @@ export const en: Translations = {
     support: {
       title: 'Isle Hacks Support',
       description:
-        'Get support for Isle Hacks purchase, setup, and compatibility questions at islehacks.org.',
+        'Get support for Isle Hacks purchase, setup, and compatibility questions at islehacks.com.',
     },
   },
   ui: {
     skipLink: 'Skip to main content',
-    browseCheats: 'Try Now',
-    browseCheatsMobile: 'Try Now',
+    browseCheats: 'View plans',
+    browseCheatsMobile: 'View plans',
     homeAria: 'Isle Hacks home',
-    checkoutAria: 'Try Now',
+    checkoutAria: 'Start checkout',
     discordAria: 'View Isle Hacks plans',
     menuOpen: 'Open menu',
     menuClose: 'Close menu',

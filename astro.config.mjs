@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import { sitemapSerialize } from './src/config/sitemap.ts';
 
 export default defineConfig({
-  site: 'https://islehacks.org',
+  site: 'https://islehacks.com',
   trailingSlash: 'always',
   redirects: {
     '/cheats/': '/store/',
@@ -17,6 +17,10 @@ export default defineConfig({
     '/products/dota-2-cheats/elite/': '/store/',
     '/products/dota-2-cheats/utilities/': '/store/',
     '/products/the-isle-hacks/': '/store/',
+    '/blog/guides/': '/guides/',
+    '/blog/features/': '/intel/',
+    '/blog/setup/': '/howto/',
+    '/blog/updates/': '/updates/',
   },
   compressHTML: true,
   prefetch: {

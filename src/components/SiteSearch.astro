@@ -1,0 +1,59 @@
+---
+import '../styles/site-search.css';
+import Icon from './icons/Icon.astro';
+import { buildSearchIndex } from '../data/searchIndex';
+
+interface Props {
+  variant?: 'header' | 'sheet';
+}
+
+const { variant = 'header' } = Astro.props;
+const indexJson = JSON.stringify(buildSearchIndex());
+---
+
+<div class:list={['site-search', variant === 'sheet' && 'site-search--sheet']} data-site-search>
+  <script type="application/json" data-site-search-index set:html={indexJson}></script>
+  <button
+    type="button"
+    class="site-search__toggle"
+    data-site-search-toggle
+    aria-expanded="false"
+    aria-controls={`site-search-panel-${variant}`}
+    aria-label="Search Isle Hacks"
+  >
+    <Icon name="search" size={16} />
+    {variant === 'header' && <span class="hidden xl:ml-1.5 xl:inline">Search</span>}
+    {variant === 'sheet' && <span>Search Isle Hacks</span>}
+  </button>
+  <div
+    id={`site-search-panel-${variant}`}
+    class="site-search__panel"
+    data-site-search-panel
+    hidden
+  >
+    <form class="site-search__form" action="/search/" method="get" role="search">
+      <label class="site-search__field">
+        <Icon name="search" size={16} />
+        <input
+          type="search"
+          name="q"
+          placeholder="Search articles, forum, FAQ…"
+          autocomplete="off"
+          data-site-search-input
+        />
+      </label>
+      <p class="site-search__hint">Quick results</p>
+    </form>
+    <ul class="site-search__results" data-site-search-results aria-live="polite"></ul>
+  </div>
+</div>
+
+<script>
+  import { initSiteSearchAll } from '../scripts/site-search.ts';
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSiteSearchAll);
+  } else {
+    initSiteSearchAll();
+  }
+</script>
