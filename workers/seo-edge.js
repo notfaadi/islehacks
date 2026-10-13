@@ -107,12 +107,10 @@ export default {
     try {
       const url = new URL(request.url);
 
-      if (url.protocol === 'http:') {
+      const needsHttps = url.protocol === 'http:';
+      const needsWwwStrip = url.hostname === `www.${CANONICAL_HOST}`;
+      if (needsHttps || needsWwwStrip) {
         url.protocol = 'https:';
-        return Response.redirect(url.href, 301);
-      }
-
-      if (url.hostname === `www.${CANONICAL_HOST}`) {
         url.hostname = CANONICAL_HOST;
         return Response.redirect(url.href, 301);
       }
