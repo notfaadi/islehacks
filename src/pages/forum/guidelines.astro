@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LegalPage from '../../components/LegalPage.astro';
+import { resolvePageSeo } from '../../config/seo';
+import { breadcrumbSchema, webPageSchema } from '../../utils/schema';
+
+const seo = resolvePageSeo('/forum/guidelines/');
+const sections = [
+  {
+    heading: 'Keep it friendly and constructive',
+    paragraphs: [
+      'Treat other players the way you want to be treated in a hunt. Ask a clear question, share what you already tried, and leave room for a useful answer.',
+      'Personal attacks, insults, and pile-ons are not part of this forum. Disagree with the setup, not the person.',
+    ],
+  },
+  {
+    heading: 'Stay on topic and add context',
+    paragraphs: [
+      'Use General for product and Windows PC questions, Guides & Hunts for ESP and radar setup, Patch Talk for Evrima or Easy Anti-Cheat updates, and Community for plans and support.',
+      'Include the Evrima branch, Windows version, and what you already checked on the status or setup pages. That context is what makes a reply useful.',
+    ],
+  },
+  {
+    heading: 'Mark spoilers and sensitive content',
+    paragraphs: [
+      'If a post gives away a nest location, a current meta route, or a surprise event, say so in the first line so other players can skip it.',
+      'Do not post account credentials, order emails, or private support details in a public thread. Use the Support page for those.',
+    ],
+  },
+  {
+    heading: 'What this forum is for',
+    paragraphs: [
+      'Discussions here summarize Isle Hacks guides: ESP terminology, radar use, patch-day checks, and Windows PC setup. Browse the linked source guide when you want the full walkthrough.',
+      'Checkout, access, and setup errors belong on Support. Feature lists belong on Products. Compatibility notes belong on Status.',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  jsonLd={[
+    webPageSchema({
+      name: 'Isle Hacks community guidelines',
+      description: seo.description,
+      url: '/forum/guidelines/',
+    }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Forum', path: '/forum/' },
+      { name: 'Guidelines', path: '/forum/guidelines/' },
+    ]),
+  ]}
+>
+  <LegalPage
+    title="Community guidelines"
+    description="Keep Isle Hacks discussions friendly, on topic, and useful. These rules apply to every forum topic."
+    breadcrumbLabel="Forum"
+    sections={sections}
+  />
+</BaseLayout>

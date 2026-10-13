@@ -1,0 +1,25 @@
+{
+  "name": "isle-hacks--org",
+  "main": "workers/seo-edge.js",
+  "compatibility_date": "2026-10-10",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "html_handling": "force-trailing-slash",
+    "not_found_handling": "404-page",
+    "run_worker_first": [
+      "/*",
+      "!/sitemap.xml",
+      "!/sitemap-index.xml",
+      "!/sitemap-0.xml",
+      "!/robots.txt",
+      "!/rss.xml"
+    ]
+  },
+  "observability": {
+    "enabled": true,
+    "traces": {
+      "enabled": true
+    }
+  }
+}

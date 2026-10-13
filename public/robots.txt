@@ -1,0 +1,11 @@
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-InspectionTool
+Allow: /
+
+User-agent: *
+Allow: /
+Disallow: /go/
+
+Sitemap: https://islehacks.org/sitemap.xml

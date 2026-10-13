@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { t } from '../i18n';
+import { resolvePageSeo } from '../config/seo';
+import { breadcrumbSchema, webPageSchema } from '../utils/schema';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { compatibilityIcons } from '../data/sectionIcons';
+import Icon from '../components/icons/Icon.astro';
+import { ROUTES } from '../utils/path';
+import { Button } from '@/components/starwind/button';
+
+const seo = resolvePageSeo('/status/');
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Status', path: '/status/' },
+];
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  jsonLd={[
+    webPageSchema({
+      name: seo.title,
+      description: seo.description,
+      url: '/status/',
+    }),
+    breadcrumbSchema(breadcrumbs),
+  ]}
+>
+  <section class="py-8 md:py-12">
+    <div class="mx-auto max-w-6xl px-5">
+      <Breadcrumbs items={breadcrumbs} />
+      <div class="mt-6 max-w-3xl">
+        <SectionHeader
+          eyebrow="Compatibility"
+          title="The Isle status"
+          desc="Check compatibility notes, game patches, and anti-cheat information before using Isle Hacks."
+          titleId="status-page-title"
+        />
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-2">
+        <article class="rounded-2xl border border-border bg-card p-6">
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Current note</p>
+          <h2 class="mt-2 text-xl font-bold">Review before every launch</h2>
+          <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
+            This page does not publish a live undetected claim. The Isle Evrima launches through Easy Anti-Cheat.
+            After a game or anti-cheat update, treat compatibility as unknown until you re-check checkout notes and stop if a build is marked unavailable.
+          </p>
+        </article>
+        <article class="rounded-2xl border border-border bg-card p-6">
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Anti-cheat</p>
+          <h2 class="mt-2 text-xl font-bold">Easy Anti-Cheat (EAC)</h2>
+          <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
+            Official The Isle support material and Steam discussions describe Evrima launching through Easy Anti-Cheat.
+            That is the game’s current anti-cheat implementation to verify before you publish or play—not a bypass promise.
+          </p>
+        </article>
+      </div>
+
+      <div class="mt-10">
+        <h2 class="text-lg font-semibold">Listed platform details</h2>
+        <ul class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {t.compatibility.items.map((item, i) => (
+            <li class="flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3 text-sm">
+              <Icon name={compatibilityIcons[i] ?? 'check'} size={16} />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="mt-10 max-w-3xl space-y-4 text-sm leading-relaxed text-muted-foreground">
+        <p>
+          The current vendor listing is Evrima-only on Windows 10 and 11. It also notes Cloud DMA for full functionality,
+          with HVCI, core isolation, TPM, and Secure Boot left on. Confirm those notes at checkout if you need the full feature set.
+        </p>
+        <p>
+          Feature availability can change after an Evrima patch. Use the store and features pages for the listed modules,
+          then come back here after updates before you launch.
+        </p>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <Button as="a" href={ROUTES.store} variant="primary">
+          View plans
+          <Icon name="arrowRight" size={17} />
+        </Button>
+        <Button as="a" href={ROUTES.setup} variant="outline">Setup notes</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { t } from '../i18n';
+import { resolvePageSeo } from '../config/seo';
+import { breadcrumbSchema, webPageSchema } from '../utils/schema';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { setupStepIcons } from '../data/sectionIcons';
+import Icon from '../components/icons/Icon.astro';
+import { ROUTES } from '../utils/path';
+import { Button } from '@/components/starwind/button';
+import { productPages } from '../data/products';
+
+const seo = resolvePageSeo('/setup/');
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Setup', path: '/setup/' },
+];
+const product = productPages[0]!;
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  jsonLd={[
+    webPageSchema({
+      name: seo.title,
+      description: seo.description,
+      url: '/setup/',
+    }),
+    breadcrumbSchema(breadcrumbs),
+  ]}
+>
+  <section class="py-8 md:py-12">
+    <div class="mx-auto max-w-6xl px-5">
+      <Breadcrumbs items={breadcrumbs} />
+      <div class="mt-6 max-w-3xl">
+        <SectionHeader
+          eyebrow={t.setup.eyebrow}
+          title="The Isle hacks setup"
+          desc={t.setup.intro}
+          titleId="setup-page-title"
+        />
+      </div>
+
+      <ol class="mt-10 grid gap-6 md:grid-cols-3">
+        {t.setup.steps.map((step, i) => (
+          <li class="rounded-2xl border border-border bg-card p-6">
+            <span class="flex size-10 items-center justify-center rounded-xl bg-primary/10">
+              <Icon name={setupStepIcons[i] ?? 'check'} size={18} />
+            </span>
+            <p class="mt-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{step.step}</p>
+            <h2 class="mt-1 text-lg font-bold">{step.title}</h2>
+            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+          </li>
+        ))}
+      </ol>
+
+      <div class="mt-12">
+        <h2 class="text-lg font-semibold">Requirements</h2>
+        <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+          {product.systemRequirements.map((req) => (
+            <li class="rounded-xl border border-border bg-card px-4 py-3 text-sm leading-relaxed">{req.text}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="mt-10 max-w-3xl space-y-4 text-sm leading-relaxed text-muted-foreground">
+        <p>
+          Start with player ESP, dinosaur ESP, and radar. Add aim assistance only after you confirm the current status.
+          Save a config and set a panic key before joining a populated server.
+        </p>
+        <p>
+          If setup fails, contact support with your order email, Windows version, The Isle branch, and the exact error text.
+        </p>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <Button as="a" href={ROUTES.store} variant="primary">
+          {t.setup.ctaPrimary}
+          <Icon name="arrowRight" size={17} />
+        </Button>
+        <Button as="a" href={ROUTES.faq} variant="outline">{t.setup.ctaSecondary}</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

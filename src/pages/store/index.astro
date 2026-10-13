@@ -1,0 +1,33 @@
+---
+import '../../styles/product-cheat-page.css';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { productHub, productPages } from '../../data/products';
+import { resolvePageSeo } from '../../config/seo';
+import { breadcrumbSchema, productSchema } from '../../utils/schema';
+import ProductDetail from '../../components/ProductDetail.astro';
+
+const seo = resolvePageSeo('/store/');
+const product = productPages[0]!;
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Store', path: productHub.path },
+];
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  jsonLd={[
+    productSchema({
+      name: product.title,
+      description: product.desc,
+      url: productHub.path,
+      offerUrl: product.buyUrl,
+      image: product.images[0]?.src,
+      sku: product.slug,
+    }),
+    breadcrumbSchema(breadcrumbs),
+  ]}
+>
+  <ProductDetail product={product} breadcrumbs={breadcrumbs} />
+</BaseLayout>

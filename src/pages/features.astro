@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FeaturesSection from '../components/FeaturesSection.astro';
+import { resolvePageSeo } from '../config/seo';
+import { breadcrumbSchema, webPageSchema } from '../utils/schema';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { ROUTES } from '../utils/path';
+import { Button } from '@/components/starwind/button';
+import Icon from '../components/icons/Icon.astro';
+
+const seo = resolvePageSeo('/features/');
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Features', path: '/features/' },
+];
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  jsonLd={[
+    webPageSchema({
+      name: seo.title,
+      description: seo.description,
+      url: '/features/',
+    }),
+    breadcrumbSchema(breadcrumbs),
+  ]}
+>
+  <section class="border-b border-border bg-muted/10 py-8 md:py-12">
+    <div class="mx-auto max-w-6xl px-5">
+      <Breadcrumbs items={breadcrumbs} />
+      <div class="mt-8 flex flex-wrap gap-3">
+        <Button as="a" href={ROUTES.store} variant="primary">
+          View store
+          <Icon name="arrowRight" size={17} />
+        </Button>
+        <Button as="a" href={ROUTES.status} variant="outline">Check status</Button>
+      </div>
+    </div>
+  </section>
+  <FeaturesSection />
+</BaseLayout>

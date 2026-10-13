@@ -1,0 +1,144 @@
+---
+import '../../styles/forum.css';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Icon from '../../components/icons/Icon.astro';
+import {
+  forumCategories,
+  forumCategoryKey,
+  forumCategoryPath,
+  forumCommunityHandle,
+  forumPosts,
+} from '../../data/forum';
+import { blogPosts, getBlogPostTimestamp } from '../../data/blog';
+import { resolvePageSeo } from '../../config/seo';
+import { breadcrumbSchema, collectionPageSchema } from '../../utils/schema';
+import { ROUTES } from '../../utils/path';
+
+const seo = resolvePageSeo('/forum/');
+const breadcrumbs = [{ name: 'Home', path: '/' }, { name: 'Forum', path: '/forum/' }];
+const sourceTimestamp = (path?: string) => {
+  const slug = path?.split('/').filter(Boolean).at(-1);
+  const article = blogPosts.find((item) => item.slug === slug);
+  return article ? getBlogPostTimestamp(article.date) : 0;
+};
+const requestedCategory = Astro.url.searchParams.get('category') ?? 'all';
+---
+
+<BaseLayout title={seo.title} description={seo.description} jsonLd={[
+  collectionPageSchema({ name: 'Isle Hacks Community Forum', description: seo.description, url: '/forum/' }),
+  breadcrumbSchema(breadcrumbs),
+]}>
+  <section class="forum-page py-8 md:py-12">
+    <div class="mx-auto max-w-6xl px-5">
+      <Breadcrumbs items={breadcrumbs} />
+      <header class="forum-hero">
+        <div>
+          <p class="section-header__eyebrow">The Isle community forum</p>
+          <h1>The Isle Community Forum</h1>
+          <p class="forum-hero__copy">Practical answers on ESP terminology, radar use, patch updates, and Windows PC setup.</p>
+        </div>
+        <a class="forum-create" href={ROUTES.blog}><Icon name="messageCircle" size={17} /> Explore the guides</a>
+      </header>
+
+      <div class="forum-layout">
+        <main class="forum-main" aria-label="Community posts">
+          <div class="forum-toolbar">
+            <div class="forum-sort" role="group" aria-label="Post sorting">
+              <button class="is-active" type="button" data-forum-sort="popular" aria-pressed="true">Popular</button>
+              <button type="button" data-forum-sort="latest" aria-pressed="false">Latest</button>
+              <button type="button" data-forum-sort="top" aria-pressed="false">Most discussed</button>
+            </div>
+            <p class="forum-toolbar-count" data-forum-count>{forumPosts.length} discussions</p>
+            <label class="forum-search">
+              <Icon name="search" size={16} />
+              <input type="search" placeholder="Search discussions" aria-label="Search discussions" data-forum-search />
+            </label>
+          </div>
+
+          <div class="forum-category-filters" role="navigation" aria-label="Filter discussions by topic">
+            <a href={ROUTES.forum} class:list={[requestedCategory === 'all' && 'is-active']} data-forum-filter="all" aria-pressed={requestedCategory === 'all' ? 'true' : 'false'}><Icon name="layers" size={14} /> All topics</a>
+            {forumCategories.map((category) => {
+              const key = forumCategoryKey(category.name);
+              const active = requestedCategory === key;
+              return (
+                <a href={forumCategoryPath(category.name)} class:list={[active && 'is-active']} data-forum-filter={key} aria-pressed={active ? 'true' : 'false'}><Icon name={category.icon} size={14} /> {category.name}</a>
+              );
+            })}
+          </div>
+          <p class="forum-results-count" data-forum-count>{forumPosts.length} guide discussions</p>
+
+          <div class="forum-post-list" aria-live="polite">
+            {forumPosts.map((post, index) => (
+              <article class="forum-post-card" data-forum-card data-post-slug={post.slug} data-upvotes={post.upvotes} data-category={forumCategoryKey(post.category)} data-comments={post.commentsCount} data-published={sourceTimestamp(post.sourcePath)} data-order={index}>
+                <div class="forum-vote" aria-label="Discussion voting">
+                  <button class="forum-vote__up" type="button" data-vote-up aria-label="Upvote this discussion"><Icon name="chevronDown" size={16} /></button>
+                  <strong data-vote-count>{post.upvotes}</strong>
+                  <button class="forum-vote__down" type="button" data-vote-down aria-label="Downvote this discussion"><Icon name="chevronDown" size={16} /></button>
+                </div>
+                <div class="forum-post-card__body">
+                  <div class="forum-post-meta">
+                    <span class={`forum-community-avatar tone-${post.categoryTone}`}><Icon name="users" size={15} /></span>
+                    <a href={forumCategoryPath(post.category)} class="forum-community-name">{forumCommunityHandle(post.category)}</a>
+                    <span>·</span><span><Icon name="userRound" size={13} /> Isle Hacks guide team</span><span>Guide-based Q&amp;A</span>
+                  </div>
+                  <a class="forum-post-title" href={`/forum/${post.slug}/`}>{post.title}</a>
+                  <p class="forum-post-excerpt">{post.excerpt}</p>
+                  {post.sourceTitle && <p class="forum-source">From the guide: <a href={post.sourcePath}>{post.sourceTitle}</a></p>}
+                  <div class="forum-post-actions">
+                    {post.flair && <span class={`forum-flair tone-${post.categoryTone}`}>{post.flair}</span>}
+                    <a href={`/forum/${post.slug}/#comments`}><Icon name="messageCircle" size={15} /> {post.commentsCount} comments</a>
+                    <a href={`/forum/${post.slug}/`}><Icon name="arrowRight" size={15} /> Read discussion</a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+          <p class="forum-empty" data-forum-empty hidden>No discussions match. Try another search or topic.</p>
+          <nav class="forum-pagination" aria-label="Discussion pages" data-forum-pagination hidden>
+            <button type="button" data-page-previous aria-label="Previous page">Previous</button>
+            <div class="forum-pagination__pages" data-page-buttons></div>
+            <button type="button" data-page-next aria-label="Next page">Next</button>
+            <span class="forum-pagination__status" data-page-status aria-live="polite"></span>
+          </nav>
+        </main>
+
+        <aside class="forum-sidebar">
+          <section class="forum-side-card forum-about">
+            <div class="forum-side-card__banner"></div>
+            <div class="forum-about__content">
+              <div class="forum-about__title"><span class="forum-community-avatar forum-community-avatar--brand" aria-hidden="true">IH</span><h2>Isle Hacks Community</h2></div>
+              <p>A home for The Isle players to discuss ESP terminology, radar, patches, and Windows PC setup.</p>
+              <div class="forum-stats"><span><b>{forumPosts.length}</b> guide discussions</span><span><b>{forumCategories.length}</b> topics</span></div>
+              <a class="forum-join" href={ROUTES.blog}>Explore all guides</a>
+            </div>
+          </section>
+          <section class="forum-side-card" id="communities">
+            <h2 class="forum-side-heading">Communities</h2>
+            <ul class="forum-community-list">
+              {forumCategories.map((category) => (
+                <li><a href={forumCategoryPath(category.name)}><span class={`forum-community-avatar tone-${category.tone}`} aria-hidden="true"><Icon name={category.icon} size={15} /></span><span><b>{category.name}</b><small>Browse related Q&amp;A</small></span><Icon name="chevronRight" size={15} /></a></li>
+              ))}
+            </ul>
+            <a class="forum-text-link" href={ROUTES.forum}>Browse all communities <Icon name="arrowRight" size={14} /></a>
+          </section>
+          <section class="forum-side-card forum-rules" id="community-guidelines">
+            <h2 class="forum-side-heading">Community guidelines</h2>
+            <ol><li>Keep it friendly and constructive</li><li>Stay on topic and add context</li><li>Mark spoilers and sensitive content</li></ol>
+            <a href={ROUTES.forumGuidelines}>Read the full guidelines <Icon name="arrowRight" size={14} /></a>
+          </section>
+          <p class="forum-sidebar-foot">
+            <a href={ROUTES.about}>About</a> · <a href={ROUTES.forumGuidelines}>Guidelines</a> · <a href={ROUTES.privacy}>Privacy</a> · <a href={ROUTES.terms}>Terms</a>
+            <br />© {new Date().getFullYear()} Isle Hacks Community
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+  <script>
+    import { initForumIndex } from '../../scripts/forum-index.ts';
+    import { initForumVotes } from '../../scripts/forum-votes.ts';
+    initForumIndex();
+    initForumVotes();
+  </script>
+</BaseLayout>

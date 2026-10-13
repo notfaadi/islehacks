@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { resolvePageSeo } from '../config/seo';
+import { breadcrumbSchema, webPageSchema } from '../utils/schema';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { ROUTES } from '../utils/path';
+import { Button } from '@/components/starwind/button';
+import Icon from '../components/icons/Icon.astro';
+
+const seo = resolvePageSeo('/reviews/');
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Reviews', path: '/reviews/' },
+];
+
+const checkpoints = [
+  {
+    title: 'Usability',
+    desc: 'Can you read player ESP, dinosaur ESP, and radar without covering scent, health, or stamina UI that The Isle already shows?',
+  },
+  {
+    title: 'Available features',
+    desc: 'Compare the store list with what you actually need: information overlays first, optional aim assistance second.',
+  },
+  {
+    title: 'Compatibility',
+    desc: 'Confirm Windows PC, the Evrima branch, and the latest status note after an Easy Anti-Cheat or game patch.',
+  },
+  {
+    title: 'Setup',
+    desc: 'Follow vendor instructions, including any Cloud DMA requirement listed for full functionality.',
+  },
+  {
+    title: 'Support',
+    desc: 'Keep your order email and error text. Support can only help when those details are included.',
+  },
+];
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  jsonLd={[
+    webPageSchema({
+      name: seo.title,
+      description: seo.description,
+      url: '/reviews/',
+    }),
+    breadcrumbSchema(breadcrumbs),
+  ]}
+>
+  <section class="py-8 md:py-12">
+    <div class="mx-auto max-w-6xl px-5">
+      <Breadcrumbs items={breadcrumbs} />
+      <div class="mt-6 max-w-3xl">
+        <SectionHeader
+          eyebrow="Buyer feedback"
+          title="How to evaluate Isle Hacks"
+          desc="This page does not invent customer quotes or star ratings. Use these checkpoints—and your own checkout experience—before choosing a plan."
+          titleId="reviews-page-title"
+        />
+      </div>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        {checkpoints.map((item) => (
+          <article class="rounded-2xl border border-border bg-card p-6">
+            <h2 class="text-lg font-bold">{item.title}</h2>
+            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
+          </article>
+        ))}
+      </div>
+
+      <p class="mt-10 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+        If you already purchased and want to report setup, compatibility, or feature questions, use the support page.
+        Published testimonials will only appear here if they can be verified—placeholder reviews are not added.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <Button as="a" href={ROUTES.store} variant="primary">
+          Compare plans
+          <Icon name="arrowRight" size={17} />
+        </Button>
+        <Button as="a" href={ROUTES.support} variant="outline">Contact support</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

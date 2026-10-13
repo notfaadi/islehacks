@@ -1,0 +1,167 @@
+---
+import '../styles/product-cheat-page.css';
+import { t } from '../i18n';
+import { productPages } from '../data/products';
+import { checkoutUrlWithPlan, formatPlanPrice, getProductPlans } from '../data/productPricing';
+import SectionHeader from './SectionHeader.astro';
+import ResponsiveImage from './ResponsiveImage.astro';
+import Icon from './icons/Icon.astro';
+import { ROUTES } from '../utils/path';
+import { Badge } from '@/components/starwind/badge';
+import { Button } from '@/components/starwind/button';
+
+const s = t.products;
+const product = productPages[0]!;
+const plans = getProductPlans(product.slug);
+const preview = product.images[0];
+const planNotes: Record<string, { blurb: string; highlight?: boolean; duration: string }> = {
+  monthly: { blurb: 'Evaluate ESP, radar, and aim assistance for 30 days.', duration: '30 days' },
+  lifetime: { blurb: 'Same listed features, billed once in USD.', highlight: true, duration: 'One-time' },
+};
+const showcaseFeatures = product.fullFeatures.slice(0, 12);
+const storeFacts = ['Available', 'The Isle', 'Windows PC', 'Evrima', 'Easy Anti-Cheat', '2 plans'];
+---
+
+<section
+  id="products"
+  class="border-y border-border bg-muted/15 py-16 md:py-24"
+  aria-labelledby="products-title"
+>
+  <div class="mx-auto max-w-6xl px-5">
+    <SectionHeader as="h2" eyebrow={s.eyebrow} title={s.title} desc={s.subtitle} titleId="products-title" />
+
+    <ul class="mt-8 flex flex-wrap gap-2" aria-label="Store facts">
+      {
+        storeFacts.map((fact) => (
+          <li>
+            <Badge variant="outline">{fact}</Badge>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="store-band mt-8 grid items-stretch gap-5 lg:grid-cols-12">
+      <article class="flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm lg:col-span-5">
+        {
+          preview && (
+            <div class="relative overflow-hidden border-b border-border bg-muted/30">
+              <ResponsiveImage
+                src={preview.src}
+                alt={preview.alt}
+                width={1280}
+                height={720}
+                sizes="(min-width: 1024px) 420px, 100vw"
+                class="aspect-[16/9] w-full object-cover"
+              />
+            </div>
+          )
+        }
+        <div class="flex flex-1 flex-col p-6 lg:p-7">
+          <div class="flex flex-wrap items-center gap-2">
+            <Badge variant="secondary">{product.badge}</Badge>
+            <Badge variant="outline">The Isle</Badge>
+            <Badge variant="outline">Windows PC</Badge>
+          </div>
+          <p class="mt-4 text-2xl font-bold normal-case">{product.title}</p>
+          <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{product.desc}</p>
+          <ul class="mt-5 grid gap-2.5 sm:grid-cols-2">
+            {
+              product.features.map((feature) => (
+                <li class="flex items-start gap-2 text-sm text-muted-foreground">
+                  <Icon name="check" size={14} class="mt-0.5 shrink-0 text-primary" />
+                  <span>{feature}</span>
+                </li>
+              ))
+            }
+          </ul>
+          <div class="mt-6 flex flex-col gap-2 sm:flex-row">
+            <Button as="a" href={product.buyUrl} variant="primary" class="sm:flex-1">
+              Buy now
+              <Icon name="arrowRight" size={17} />
+            </Button>
+            <Button as="a" href={ROUTES.store} variant="outline" class="sm:flex-1">
+              View details
+              <Icon name="arrowRight" size={17} />
+            </Button>
+          </div>
+        </div>
+      </article>
+
+      <div class="flex flex-col gap-5 lg:col-span-7">
+        <div class="grid gap-5 sm:grid-cols-2">
+          {
+            plans.map((plan) => {
+              const note = planNotes[plan.id];
+              return (
+                <article
+                  class:list={[
+                    'flex flex-col rounded-2xl border bg-card p-6 shadow-sm',
+                    note?.highlight ? 'border-primary/50 ring-1 ring-primary/20' : 'border-border',
+                  ]}
+                >
+                  <div class="flex items-center justify-between gap-3">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{plan.label}</p>
+                    {note?.highlight && <Badge>Best value</Badge>}
+                  </div>
+                  <p class="mt-3 font-[family-name:var(--font-heading)] text-4xl font-bold text-primary">
+                    {formatPlanPrice(plan.priceUsd)}
+                  </p>
+                  <p class="mt-1 text-sm text-muted-foreground">
+                    {plan.priceNote} · {note?.duration}
+                  </p>
+                  <p class="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">{note?.blurb}</p>
+                  <ul class="mt-4 space-y-2 text-sm text-muted-foreground">
+                    <li class="flex items-start gap-2">
+                      <Icon name="check" size={14} class="mt-0.5 shrink-0 text-primary" />
+                      Same listed ESP and radar set
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <Icon name="check" size={14} class="mt-0.5 shrink-0 text-primary" />
+                      Optional aim assistance
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <Icon name="check" size={14} class="mt-0.5 shrink-0 text-primary" />
+                      Evrima on Windows PC
+                    </li>
+                  </ul>
+                  <Button
+                    as="a"
+                    href={checkoutUrlWithPlan(product.buyUrl, plan.id)}
+                    variant={note?.highlight ? 'primary' : 'outline'}
+                    class="mt-6 w-full"
+                  >
+                    Choose {plan.label}
+                    <Icon name="arrowRight" size={17} />
+                  </Button>
+                </article>
+              );
+            })
+          }
+        </div>
+
+        <div class="flex-1 rounded-2xl border border-border bg-card p-5 shadow-sm sm:p-6">
+          <div class="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-primary">Included modules</p>
+              <p class="mt-1 text-lg font-bold">What both plans list</p>
+            </div>
+            <Button as="a" href={ROUTES.features} variant="outline" size="sm">
+              All features
+              <Icon name="arrowRight" size={16} />
+            </Button>
+          </div>
+          <ul class="mt-4 grid gap-2 sm:grid-cols-2">
+            {
+              showcaseFeatures.map((feature) => (
+                <li class="flex items-start gap-2 rounded-xl border border-border/80 bg-muted/20 px-3 py-2 text-sm text-muted-foreground">
+                  <Icon name="check" size={14} class="mt-0.5 shrink-0 text-primary" />
+                  <span>{feature}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
