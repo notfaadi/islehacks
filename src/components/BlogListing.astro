@@ -56,7 +56,9 @@ const filters = [{ label: t.blog.filterAll, value: 'all' as const }, ...tags.map
   <section class="py-8 md:py-12">
     <div class="mx-auto max-w-6xl px-5">
       <Breadcrumbs items={breadcrumbs} />
-      {featured && <BlogCard post={featured} index={0} eager showDate layout="featured" />}
+      {activeTag === 'all' && featured && (
+        <BlogCard post={featured} index={0} eager showDate layout="featured" />
+      )}
     </div>
   </section>
 
@@ -97,7 +99,11 @@ const filters = [{ label: t.blog.filterAll, value: 'all' as const }, ...tags.map
         <BlogSortSelect />
       </div>
 
-      <div id="blog-grid" class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-10">
+      <div
+        id="blog-grid"
+        class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-10"
+        data-blog-topic={activeTag !== 'all' ? activeTag : undefined}
+      >
         {grid.map((post, index) => (
           <BlogCard post={post} index={index} showDate />
         ))}

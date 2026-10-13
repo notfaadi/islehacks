@@ -87,7 +87,7 @@ export function getBlogTags() {
 }
 
 export function getBlogPostsByTag(tag: string) {
-  return blogPosts.filter((post) => post.tag === tag);
+  return blogPosts.filter((post) => post.tag === tag || post.tags?.includes(tag));
 }
 
 export function getBlogListing(tag: string | 'all' = 'all') {
@@ -97,7 +97,7 @@ export function getBlogListing(tag: string | 'all' = 'all') {
   }
 
   const posts = getBlogPostsByTag(tag);
-  return { featured: posts[0], grid: posts.slice(1) };
+  return { featured: undefined, grid: posts };
 }
 
 export function getBlogPostTimestamp(date: string) {

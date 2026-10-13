@@ -23,3 +23,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# local reference clones
+_ref-sync/
+_upstream-com/
+temp-check/

@@ -41,14 +41,22 @@ export function initBlogIndexFilters(emptyMessage: string) {
     return tsB - tsA;
   };
 
+  const topicPage = grid.getAttribute('data-blog-topic');
+
   const apply = () => {
-    const tag = activeTag();
     const sort = getSort();
     const items = cards();
 
     const sorted = [...items].sort((a, b) => compareCards(a, b, sort));
     sorted.forEach((el) => grid.appendChild(el));
 
+    if (topicPage) {
+      items.forEach((el) => el.classList.remove('hidden'));
+      if (emptyEl) emptyEl.classList.toggle('hidden', items.length > 0);
+      return;
+    }
+
+    const tag = activeTag();
     let visibleCount = 0;
     items.forEach((el) => {
       const match = tag === 'all' || el.getAttribute('data-tag') === tag;

@@ -17,6 +17,7 @@ export const blogPosts: BlogPostFull[] = [
     date: 'Oct 8, 2026',
     readTime: '8 min read',
     featured: true,
+    tags: ['Setup'],
     body: [
       {
         type: 'p',
@@ -181,7 +182,7 @@ export const blogPosts: BlogPostFull[] = [
     tag: 'Setup',
     title: 'The Isle hacks PC setup on Windows',
     slug: 'the-isle-hacks-pc-setup',
-    image: '/images/gameplay/isle-forest-species.png',
+    image: '/images/gameplay/isle-shore-swim.png',
     desc: 'Windows PC requirements, Evrima-only notes, and a conservative first-run configuration.',
     date: 'Oct 3, 2026',
     readTime: '7 min read',
@@ -222,10 +223,11 @@ export const blogPosts: BlogPostFull[] = [
     tag: 'Features',
     title: 'The Isle radar features for local rotations',
     slug: 'the-isle-radar-features',
-    image: '/images/gameplay/isle-forest-esp.png',
+    image: '/images/gameplay/isle-beach-tracers-esp.png',
     desc: 'How radar complements ESP when you need nearby player and dinosaur cues.',
     date: 'Oct 2, 2026',
     readTime: '5 min read',
+    tags: ['Updates'],
     body: [
       {
         type: 'p',
@@ -252,6 +254,7 @@ export const blogPosts: BlogPostFull[] = [
     desc: 'Plain-language definitions for player ESP, dinosaur ESP, health ESP, and resource markers.',
     date: 'Oct 1, 2026',
     readTime: '7 min read',
+    tags: ['Setup'],
     body: [
       {
         type: 'p',
@@ -289,7 +292,7 @@ export const blogPosts: BlogPostFull[] = [
     tag: 'Updates',
     title: 'The Isle Easy Anti-Cheat compatibility notes',
     slug: 'the-isle-compatibility-eac',
-    image: '/images/gameplay/isle-plains-health.png',
+    image: '/images/gameplay/isle-jungle-raptor-esp.png',
     desc: 'What Easy Anti-Cheat means for The Isle Evrima and how to treat status after a patch.',
     date: 'Sep 30, 2026',
     readTime: '6 min read',
@@ -325,10 +328,11 @@ export const blogPosts: BlogPostFull[] = [
     tag: 'Guides',
     title: 'Isle Hacks monthly vs lifetime plans',
     slug: 'the-isle-monthly-vs-lifetime',
-    image: '/images/gameplay/isle-forest-radar.png',
+    image: '/images/gameplay/isle-forest-aim-esp.png',
     desc: 'Compare the $35 monthly plan and the $150 lifetime plan before checkout.',
     date: 'Sep 29, 2026',
     readTime: '4 min read',
+    tags: ['Updates'],
     body: [
       {
         type: 'p',

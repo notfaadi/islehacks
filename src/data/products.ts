@@ -116,6 +116,30 @@ type GalleryKey = keyof typeof galleryRaw;
 const gameplay = '/images/gameplay';
 
 const galleryRaw = {
+  gpShore: {
+    src: `${gameplay}/isle-shore-swim.png`,
+    alt: 'The Isle Evrima shoreline with dinosaur ESP labels and health readouts over water',
+    caption: 'Shoreline awareness',
+    captionDesc: 'Player and creature cues along beaches and shallow water on Evrima.',
+  },
+  gpJungleRaptor: {
+    src: `${gameplay}/isle-jungle-raptor-esp.png`,
+    alt: 'Isle Hacks jungle ESP with crosshair, tracers, and raptor tracking through tall grass',
+    caption: 'Jungle ESP and tracers',
+    captionDesc: 'Crosshair locks, distance lines, and boxes through dense cover.',
+  },
+  gpBeachTracers: {
+    src: `${gameplay}/isle-beach-tracers-esp.png`,
+    alt: 'Isle Hacks beach overlay with snaplines, boxes, and radar on an open shore',
+    caption: 'Beach snaplines and radar',
+    captionDesc: 'Long-range tracers and radar cues on open terrain.',
+  },
+  gpForestAim: {
+    src: `${gameplay}/isle-forest-aim-esp.png`,
+    alt: 'Isle Hacks forest overlay with aim assistance FOV and skeleton ESP on dinosaurs',
+    caption: 'Forest aim and skeleton ESP',
+    captionDesc: 'FOV ring, skeleton highlights, and species readouts in woodland fights.',
+  },
   gpEsp: {
     src: `${gameplay}/isle-forest-esp.png`,
     alt: 'Isle Hacks overlay in a forest showing dinosaur ESP boxes, names, and distance',
@@ -171,7 +195,15 @@ const productContent: Record<
   Pick<ProductPage, 'overview' | 'images' | 'fullFeatures' | 'goodToKnow' | 'limitations' | 'systemRequirements'>
 > = {
   'the-isle-hacks': {
-    images: slide('gpEsp', 'gpHorn', 'gpHealth', 'gpRadar', 'gpCreatures', 'gpWorld'),
+    images: slide(
+      'gpShore',
+      'gpJungleRaptor',
+      'gpBeachTracers',
+      'gpForestAim',
+      'gpEsp',
+      'gpHorn',
+      'gpHealth',
+    ),
     goodToKnow: sharedGoodToKnow,
     limitations: sharedLimitations,
     systemRequirements: isleSystemRequirements,
@@ -282,7 +314,14 @@ export function getAllCheatSlugs() {
   return cheatPages.map((p) => p.slug);
 }
 
-export const heroSlides = slide('gpEsp', 'gpHorn', 'gpHealth', 'gpRadar', 'gpCreatures', 'gpWorld');
+export const heroSlides = slide(
+  'gpShore',
+  'gpJungleRaptor',
+  'gpBeachTracers',
+  'gpForestAim',
+  'gpEsp',
+  'gpHorn',
+);
 
 export const productHub = {
   path: '/store/',

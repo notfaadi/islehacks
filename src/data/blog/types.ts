@@ -9,5 +9,7 @@ export type BlogBlock =
 export interface BlogPostFull extends BlogPost {
   featured?: boolean;
   author?: string;
+  /** Extra topic labels for /blog/setup/, /blog/updates/, etc. */
+  tags?: string[];
   body: BlogBlock[];
 }
