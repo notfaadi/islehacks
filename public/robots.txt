@@ -8,4 +8,4 @@ User-agent: *
 Allow: /
 Disallow: /go/
 
-Sitemap: https://islehacks.org/sitemap.xml
+Sitemap: https://islehack.net/sitemap.xml

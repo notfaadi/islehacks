@@ -1,6 +1,7 @@
 import { resolveCheckoutPathRedirect } from '../src/config/checkout-redirects.mjs';
+import { SITE_DOMAIN } from '../src/config/site-host.mjs';
 
-const CANONICAL_HOST = 'islehacks.org';
+const CANONICAL_HOST = SITE_DOMAIN;
 const FILE_ASSETS = new Set([
   '/sitemap.xml',
   '/sitemap-index.xml',
@@ -48,6 +49,11 @@ function applyAssetHeaders(pathname, headers) {
 
   if (contentType.toLowerCase().startsWith('text/html') && !/charset=/i.test(contentType)) {
     headers.set('content-type', 'text/html; charset=utf-8');
+  }
+
+  if (contentType.toLowerCase().includes('text/html')) {
+    headers.set('strict-transport-security', 'max-age=31536000; includeSubDomains; preload');
+    headers.set('x-content-type-options', 'nosniff');
   }
 
   if (isImmutableAsset(pathname)) {
@@ -101,14 +107,13 @@ export default {
     try {
       const url = new URL(request.url);
 
-      if (url.hostname === `www.${CANONICAL_HOST}` || url.hostname.startsWith('www.')) {
-        url.hostname = CANONICAL_HOST;
+      if (url.protocol === 'http:') {
         url.protocol = 'https:';
         return Response.redirect(url.href, 301);
       }
 
-      if (url.protocol === 'http:') {
-        url.protocol = 'https:';
+      if (url.hostname === `www.${CANONICAL_HOST}`) {
+        url.hostname = CANONICAL_HOST;
         return Response.redirect(url.href, 301);
       }
 

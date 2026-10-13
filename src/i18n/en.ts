@@ -7,10 +7,10 @@ const productBase = PRODUCT_BASE;
 export const en: Translations = {
   site: {
     name: 'Isle Hacks',
-    domain: 'islehacks.com',
+    domain: 'islehack.net',
     title: 'The Isle Hacks | Features, ESP and Radar',
     description:
-      'Explore The Isle hacks for Windows PC. Discover available gameplay features, configuration options, compatibility information, and current status before choosing a plan.',
+      'The Isle hacks for Windows PC (Evrima): ESP, radar, and plans. Compare features, check Easy Anti-Cheat status, and review setup before checkout.',
     discord: PRIMARY_CHECKOUT_PATH,
   },
   nav: [
@@ -141,7 +141,7 @@ export const en: Translations = {
     eyebrow: 'Why us',
     title: 'A focused The Isle listing—not a multi-game catalog',
     subtitle:
-      'Isle Hacks is built around one game. Review features, plans, and status on islehacks.com before you buy.',
+      'Isle Hacks is built around one game. Review features, plans, and status on islehack.net before you buy.',
     usLabel: 'Isle Hacks',
     otherLabel: 'Typical listing',
     rows: [
@@ -402,7 +402,7 @@ export const en: Translations = {
         num: '01',
         phase: 'Before purchase',
         title: 'Check current status',
-        desc: 'Read the status page on islehacks.com after any Evrima or Easy Anti-Cheat update.',
+        desc: 'Read the status page on islehack.net after any Evrima or Easy Anti-Cheat update.',
       },
       {
         num: '02',
@@ -469,7 +469,7 @@ export const en: Translations = {
     ],
     ticketTitle: 'Include in your ticket',
     ticketItems: [
-      { title: 'Order email', desc: 'The address used at checkout on islehacks.com or through the checkout partner.' },
+      { title: 'Order email', desc: 'The address used at checkout on islehack.net or through the checkout partner.' },
       { title: 'Platform', desc: 'Windows 10 or 11, plus whether you are on the Evrima branch.' },
       { title: 'Error detail', desc: 'Screenshot or exact message from the loader, Steam, or Easy Anti-Cheat.' },
     ],
@@ -482,7 +482,7 @@ export const en: Translations = {
       {
         num: '01',
         q: 'Where do I check if The Isle hacks are currently compatible?',
-        a: 'Use the status page on islehacks.com before purchase or launch, especially after an Evrima or Easy Anti-Cheat update.',
+        a: 'Use the status page on islehack.net before purchase or launch, especially after an Evrima or Easy Anti-Cheat update.',
       },
       {
         num: '02',
@@ -512,7 +512,7 @@ export const en: Translations = {
     ],
   },
   footer: {
-    tagline: 'The Isle hacks — ESP, radar, and plans for Windows PC. islehacks.com',
+    tagline: 'The Isle hacks — ESP, radar, and plans for Windows PC. islehack.net',
     explore: 'Explore',
     exploreLinks: [
       { href: '/store/', label: 'Products', ariaLabel: 'Products' },
@@ -531,7 +531,7 @@ export const en: Translations = {
     about: {
       title: 'About Isle Hacks',
       description:
-        'Isle Hacks publishes The Isle feature notes, plans, setup guidance, and status information at islehacks.com.',
+        'Isle Hacks publishes The Isle feature notes, plans, setup guidance, and status information at islehack.net.',
       sections: [
         {
           heading: 'Who we are',
@@ -558,12 +558,12 @@ export const en: Translations = {
     privacy: {
       title: 'Privacy Policy',
       description:
-        'How Isle Hacks handles analytics, cookies, and contact data when you use islehacks.com.',
+        'How Isle Hacks handles analytics, cookies, and contact data when you use islehack.net.',
       sections: [
         {
           heading: 'Information we collect',
           paragraphs: [
-            'We may collect standard web analytics such as page views, device type, browser, and approximate region through Google Analytics when enabled. Checkout and license delivery happen on external checkout pages—we do not store payment card data on islehacks.com.',
+            'We may collect standard web analytics such as page views, device type, browser, and approximate region through Google Analytics when enabled. Checkout and license delivery happen on external checkout pages—we do not store payment card data on islehack.net.',
           ],
         },
         {
@@ -589,12 +589,12 @@ export const en: Translations = {
     terms: {
       title: 'Terms & Conditions',
       description:
-        'Purchase, license, refund, and use terms for Isle Hacks products and islehacks.com.',
+        'Purchase, license, refund, and use terms for Isle Hacks products and islehack.net.',
       sections: [
         {
           heading: 'Agreement',
           paragraphs: [
-            'Last updated: October 2026. By using islehacks.com or completing checkout for any product listed here, you agree to these Terms & Conditions and our Privacy Policy.',
+            'Last updated: October 2026. By using islehack.net or completing checkout for any product listed here, you agree to these Terms & Conditions and our Privacy Policy.',
           ],
         },
         {
@@ -607,7 +607,7 @@ export const en: Translations = {
         {
           heading: 'Checkout and delivery',
           paragraphs: [
-            'Payment and license delivery run on external checkout pages. islehacks.com does not process or store payment card numbers.',
+            'Payment and license delivery run on external checkout pages. islehack.net does not process or store payment card numbers.',
             'After purchase, follow the setup instructions provided in the checkout flow before launching The Isle.',
           ],
         },
@@ -649,7 +649,7 @@ export const en: Translations = {
     support: {
       title: 'Isle Hacks Support',
       description:
-        'Get support for Isle Hacks purchase, setup, and compatibility questions at islehacks.com.',
+        'Get support for Isle Hacks purchase, setup, and compatibility questions at islehack.net.',
     },
   },
   ui: {

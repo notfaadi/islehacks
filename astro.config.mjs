@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import { sitemapSerialize } from './src/config/sitemap.ts';
 
 export default defineConfig({
-  site: 'https://islehacks.com',
+  site: 'https://islehack.net',
   trailingSlash: 'always',
   redirects: {
     '/cheats/': '/store/',

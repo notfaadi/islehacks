@@ -84,10 +84,11 @@ ${urlBlocks}
 const relDist = path.relative(root, dist).replaceAll('\\', '/');
 fs.writeFileSync(path.join(dist, 'sitemap.xml'), formatted, 'utf8');
 
+const siteOrigin = entries[0] ? new URL(entries[0].loc).origin : 'https://islehack.net';
 const indexXml = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
-    <loc>https://islehacks.org/sitemap.xml</loc>
+    <loc>${escapeXml(`${siteOrigin}/sitemap.xml`)}</loc>
     <lastmod>${new Date().toISOString().slice(0, 10)}</lastmod>
   </sitemap>
 </sitemapindex>

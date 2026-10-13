@@ -1,4 +1,4 @@
-/** Auto-synced from islehacks.com (scripts/live-seo-snapshot.json). */
+/** Auto-synced from islehack.net (scripts/live-seo-snapshot.json). */
 export interface RouteSeoEntry {
   title: string;
   description: string;
@@ -8,12 +8,12 @@ export interface RouteSeoEntry {
 export const ROUTE_SEO: Record<string, RouteSeoEntry> = {
   "/": {
     title: "The Isle Hacks | Features, ESP and Radar",
-    description: "Explore The Isle hacks for Windows PC. Discover available gameplay features, configuration options, compatibility information, and current status before choosing a plan.",
+    description: "The Isle hacks for Windows PC (Evrima): ESP, radar, and plans. Compare features, check Easy Anti-Cheat status, and review setup before checkout.",
     keywords: "the isle cheat,the isle esp,the isle aimbot,the isle wallhack,the isle hack,the isle hacks,undetected the isle cheat,the isle hacks 2026,isle hacks,the isle software,the isle overlay,the isle evrima hacks",
   },
   "/about/": {
     title: "About Isle Hacks",
-    description: "What Isle Hacks publishes: The Isle features, plans, setup notes, and status information at islehacks.com.",
+    description: "What Isle Hacks publishes: The Isle features, plans, setup notes, and status information at islehack.net.",
   },
   "/are-resource-markers-listed/": {
     title: "Are fruit, water, and corpse markers listed? | Isle Hacks",
@@ -176,7 +176,7 @@ export const ROUTE_SEO: Record<string, RouteSeoEntry> = {
   },
   "/privacy/": {
     title: "Privacy Policy | Isle Hacks",
-    description: "How islehacks.com uses analytics, cookies, and contact data when you browse or request support.",
+    description: "How islehack.net uses analytics, cookies, and contact data when you browse or request support.",
   },
   "/radar-or-esp-first/": {
     title: "Should I start with radar or ESP boxes? | Isle Hacks",
@@ -211,7 +211,7 @@ export const ROUTE_SEO: Record<string, RouteSeoEntry> = {
   },
   "/terms/": {
     title: "Terms & Conditions | Isle Hacks",
-    description: "Purchase terms, license use, and refund policy for Isle Hacks products sold through islehacks.com.",
+    description: "Purchase terms, license use, and refund policy for Isle Hacks products sold through islehack.net.",
   },
   "/the-isle-aimbot/": {
     title: "The Isle aimbot and aim assistance options | Isle Hacks",

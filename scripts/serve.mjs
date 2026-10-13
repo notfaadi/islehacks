@@ -4,8 +4,9 @@ import path from 'node:path';
 import zlib from 'node:zlib';
 import { resolvePathRedirect } from './redirects.mjs';
 import { resolveCheckoutPathRedirect } from '../src/config/checkout-redirects.mjs';
+import { SITE_DOMAIN } from '../src/config/site-host.mjs';
 
-const CANONICAL_HOST = 'islehacks.org';
+const CANONICAL_HOST = SITE_DOMAIN;
 const distDir = path.resolve('dist');
 const port = Number(process.env.PORT) || 3000;
 

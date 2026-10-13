@@ -12,7 +12,7 @@ export const PAGE_SEO: Record<string, PageSeoEntry> = {
   '/': {
     title: 'The Isle Hacks | Features, ESP and Radar',
     description:
-      'Explore The Isle hacks for Windows PC. Discover available gameplay features, configuration options, compatibility information, and current status before choosing a plan.',
+      'The Isle hacks for Windows PC (Evrima): ESP, radar, and plans. Compare features, check Easy Anti-Cheat status, and review setup before checkout.',
   },
   '/features/': {
     title: 'The Isle Features | Isle Hacks',
@@ -122,17 +122,17 @@ export const PAGE_SEO: Record<string, PageSeoEntry> = {
   '/terms/': {
     title: 'Terms & Conditions | Isle Hacks',
     description:
-      'Purchase terms, license use, and refund policy for Isle Hacks products sold through islehacks.com.',
+      'Purchase terms, license use, and refund policy for Isle Hacks products sold through islehack.net.',
   },
   '/privacy/': {
     title: 'Privacy Policy | Isle Hacks',
     description:
-      'How islehacks.com uses analytics, cookies, and contact data when you browse or request support.',
+      'How islehack.net uses analytics, cookies, and contact data when you browse or request support.',
   },
   '/about/': {
     title: 'About Isle Hacks',
     description:
-      'What Isle Hacks publishes: The Isle features, plans, setup notes, and status information at islehacks.com.',
+      'What Isle Hacks publishes: The Isle features, plans, setup notes, and status information at islehack.net.',
   },
 };
 

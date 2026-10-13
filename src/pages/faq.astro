@@ -24,7 +24,7 @@ const faqs = getAllFaqs();
     webPageSchema({
       name: 'The Isle Hacks FAQ | Isle Hacks',
       description:
-        'Answers about The Isle hacks, Windows PC support, ESP, plans, compatibility, setup, and checkout at islehacks.org.',
+        'Answers about The Isle hacks, Windows PC support, ESP, plans, compatibility, setup, and checkout at islehack.net.',
       url: '/faq/',
     }),
     faqPageSchema(faqs.map((f, i) => ({ num: String(i + 1).padStart(2, '0'), q: f.q, a: f.a.replace(/<[^>]+>/g, '') }))),

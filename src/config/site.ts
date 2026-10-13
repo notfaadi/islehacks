@@ -1,4 +1,6 @@
-export const SITE_DOMAIN = 'islehacks.com';
+import { SITE_DOMAIN as DEPLOY_DOMAIN } from './site-host.mjs';
+
+export const SITE_DOMAIN = DEPLOY_DOMAIN;
 export const SITE_URL = `https://${SITE_DOMAIN}`;
 export const PRODUCT_BASE = '/store/';
 export const TITLE_PREFIX = 'The Isle Hacks';
