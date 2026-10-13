@@ -116,6 +116,30 @@ type GalleryKey = keyof typeof galleryRaw;
 const gameplay = '/images/gameplay';
 
 const galleryRaw = {
+  gpShowRiver: {
+    src: `${gameplay}/isle-showcase-river.png`,
+    alt: 'The Isle Evrima riverbank scene with in-game overlay cues on a Carnotaurus near the water',
+    caption: 'Riverbank readouts',
+    captionDesc: 'Track threats and prey along forest rivers before you commit to a crossing.',
+  },
+  gpShowCoastal: {
+    src: `${gameplay}/isle-showcase-coastal.png`,
+    alt: 'The Isle Evrima coastal swim with overlay markers on aquatic and shore dinosaurs',
+    caption: 'Coastal awareness',
+    captionDesc: 'Swim routes, beach exits, and distant player cues on open water.',
+  },
+  gpShowBeach: {
+    src: `${gameplay}/isle-showcase-beach.png`,
+    alt: 'The Isle Evrima tropical beach with ESP-style labels on multiple dinosaurs near a lagoon',
+    caption: 'Beach server density',
+    captionDesc: 'Name, health, and distance stacks when a populated shore gets chaotic.',
+  },
+  gpShowRidge: {
+    src: `${gameplay}/isle-showcase-ridge.png`,
+    alt: 'The Isle Evrima rocky ridge path with overlay markers on a spotted Carnotaurus sprinting through cover',
+    caption: 'Ridge rotation',
+    captionDesc: 'Mini-map cues, stamina widgets, and target boxes while cutting across rocky trails.',
+  },
   gpShore: {
     src: `${gameplay}/isle-shore-swim.png`,
     alt: 'The Isle Evrima shoreline with dinosaur ESP labels and health readouts over water',
@@ -178,6 +202,14 @@ const galleryRaw = {
   },
 };
 
+/** Primary storefront / hero gallery (user-provided Evrima captures). */
+export const showcaseGalleryKeys = [
+  'gpShowRiver',
+  'gpShowCoastal',
+  'gpShowBeach',
+  'gpShowRidge',
+] as const satisfies readonly GalleryKey[];
+
 function slide(...keys: GalleryKey[]): ProductSlide[] {
   return keys.map((k) => {
     const item = galleryRaw[k];
@@ -195,15 +227,7 @@ const productContent: Record<
   Pick<ProductPage, 'overview' | 'images' | 'fullFeatures' | 'goodToKnow' | 'limitations' | 'systemRequirements'>
 > = {
   'the-isle-hacks': {
-    images: slide(
-      'gpShore',
-      'gpJungleRaptor',
-      'gpBeachTracers',
-      'gpForestAim',
-      'gpEsp',
-      'gpHorn',
-      'gpHealth',
-    ),
+    images: slide(...showcaseGalleryKeys),
     goodToKnow: sharedGoodToKnow,
     limitations: sharedLimitations,
     systemRequirements: isleSystemRequirements,
@@ -314,16 +338,7 @@ export function getAllCheatSlugs() {
   return cheatPages.map((p) => p.slug);
 }
 
-export const heroSlides = slide(
-  'gpShore',
-  'gpJungleRaptor',
-  'gpBeachTracers',
-  'gpForestAim',
-  'gpEsp',
-  'gpHorn',
-  'gpHealth',
-  'gpRadar',
-);
+export const heroSlides = slide(...showcaseGalleryKeys);
 
 export const productHub = {
   path: '/store/',

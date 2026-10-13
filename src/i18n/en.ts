@@ -258,9 +258,10 @@ export const en: Translations = {
     ],
   },
   products: {
-    eyebrow: 'Store',
-    title: 'The Isle store',
-    subtitle: 'Compare monthly and lifetime Isle Hacks plans for The Isle on Windows PC.',
+    eyebrow: 'Launch bay',
+    title: 'Choose your loadout pass',
+    subtitle:
+      'Duel the plans side-by-side, spin up checkout, and browse the full module loadout—built for Evrima on Windows PC.',
     viewAll: 'View store',
     get: 'Get',
     explore: 'Explore',

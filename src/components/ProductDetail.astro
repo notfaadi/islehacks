@@ -8,9 +8,8 @@ import { getProductFaqs } from '../data/faq';
 import SiteFaqSection from './SiteFaqSection.astro';
 import Breadcrumbs from './Breadcrumbs.astro';
 import ProductDetailHeader from './product/ProductDetailHeader.astro';
-import ProductCheckoutPanel from './product/ProductCheckoutPanel.astro';
 import ProductHighlightsSection from './product/ProductHighlightsSection.astro';
-import ProductFeaturesSection from './product/ProductFeaturesSection.astro';
+import StoreCatalogBlock from './store/StoreCatalogBlock.astro';
 import ProductDescriptionSection from './product/ProductDescriptionSection.astro';
 import ProductExperienceSection from './product/ProductExperienceSection.astro';
 import ProductRelatedGuidesSection from './product/ProductRelatedGuidesSection.astro';
@@ -42,9 +41,17 @@ const showDescToggle = descriptionBlocks.length > 2;
       <ProductDetailHeader product={product} />
     </div>
 
-    <div class="product-detail-hero__grid mt-10 grid items-start gap-8">
+    <div class="mt-8">
+      <StoreCatalogBlock
+        product={product}
+        variant="store"
+        manifestFeatures={product.fullFeatures}
+        showViewStore={false}
+      />
+    </div>
+
+    <div class="mt-12">
       <ProductScreenshotGallery images={product.images} id={`gallery-${product.slug}`} />
-      <ProductCheckoutPanel product={product} />
     </div>
   </div>
 </section>
@@ -56,8 +63,6 @@ const showDescToggle = descriptionBlocks.length > 2;
   blocks={descriptionBlocks}
   showToggle={showDescToggle}
 />
-
-<ProductFeaturesSection features={product.fullFeatures} productName={product.name} />
 
 <ProductExperienceSection
   images={product.images}

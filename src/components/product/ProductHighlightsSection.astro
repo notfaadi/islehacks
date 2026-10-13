@@ -3,7 +3,6 @@ import type { ProductPage } from '../../data/products';
 import SectionHeader from '../SectionHeader.astro';
 import Icon from '../icons/Icon.astro';
 import { Button } from '@/components/starwind/button';
-import { Badge } from '@/components/starwind/badge';
 
 interface Props {
   product: ProductPage;
@@ -13,42 +12,48 @@ const { product } = Astro.props;
 ---
 
 <section
-  class="border-b border-border bg-muted/20 py-12 md:py-16"
+  class="border-b border-border bg-muted/10 py-12 md:py-16"
   aria-labelledby="product-highlights-title"
 >
   <div class="mx-auto max-w-6xl px-5">
     <SectionHeader
-      eyebrow="At a glance"
-      title="Key capabilities"
-      desc={`What ${product.name} focuses on before you open the full module list.`}
+      eyebrow="Summary"
+      title="Core capabilities at a glance"
+      desc={`Short list before the experience walkthrough and guides for ${product.name}.`}
       titleId="product-highlights-title"
     />
 
-    <div class="product-detail__inline-row mt-10 flex flex-wrap gap-2.5 md:gap-3">
+    <ul class="mt-8 grid gap-0 border border-border sm:grid-cols-2">
       {
-        product.features.map((feature) => (
-          <Badge variant="outline" size="lg" class="rounded-full px-4 py-2 text-sm font-medium leading-snug">
-            {feature}
-          </Badge>
+        product.features.map((feature, index) => (
+          <li
+            class:list={[
+              'flex items-start gap-3 border-b border-border px-4 py-3 text-sm',
+              index % 2 === 0 ? 'sm:border-r' : '',
+            ]}
+          >
+            <Icon name="check" size={15} class="mt-0.5 shrink-0 text-primary" />
+            <span class="text-muted-foreground">{feature}</span>
+          </li>
         ))
       }
-    </div>
+    </ul>
 
     {
       product.more > 0 && (
-        <p class="product-detail__text-center mt-6 text-sm text-muted-foreground">
-          Plus {product.more} additional listed modules—see the full list below.
+        <p class="mt-4 text-sm text-muted-foreground">
+          Plus {product.more} additional modules in the manifest above.
         </p>
       )
     }
 
-    <div class="product-detail__inline-row mt-8 flex flex-wrap gap-3">
-      <Button type="button" data-scroll-target="product-features" variant="outline" size="sm" class="rounded-full">
-        All modules
+    <div class="mt-8 flex flex-wrap gap-3">
+      <Button type="button" data-scroll-target="product-experience" variant="outline" size="sm" class="rounded-md">
+        Experience section
         <Icon name="chevronDown" size={16} />
       </Button>
-      <Button as="a" href={product.buyUrl} variant="primary" size="sm" class="rounded-full">
-        Buy now
+      <Button as="a" href={product.buyUrl} variant="primary" size="sm" class="rounded-md">
+        Checkout
         <Icon name="arrowRight" size={16} />
       </Button>
     </div>

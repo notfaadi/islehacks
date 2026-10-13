@@ -1,0 +1,338 @@
+---
+import '../../styles/store-catalog.css';
+import type { ProductPage } from '../../data/products';
+import {
+  checkoutUrlWithPlan,
+  formatPlanPrice,
+  getProductPlans,
+  type ProductPlanId,
+} from '../../data/productPricing';
+import ResponsiveImage from '../ResponsiveImage.astro';
+import Icon from '../icons/Icon.astro';
+import { ROUTES } from '../../utils/path';
+import { Button } from '@/components/starwind/button';
+
+interface Props {
+  product: ProductPage;
+  variant?: 'teaser' | 'store';
+  manifestFeatures?: string[];
+  showViewStore?: boolean;
+}
+
+function groupLoadout(features: string[]) {
+  const vision: string[] = [];
+  const combat: string[] = [];
+  const utility: string[] = [];
+
+  for (const feature of features) {
+    const f = feature.toLowerCase();
+    if (/aim|crosshair|fullbright/.test(f)) combat.push(feature);
+    else if (/esp|radar|marker|distance|snap|visible|head|direction|box|name|health|species|corpse|resource|gore|npc|dinosaur|player|filter|color|growth|stamina/.test(f))
+      vision.push(feature);
+    else utility.push(feature);
+  }
+
+  return [
+    { id: 'vision', label: 'Vision stack', items: vision },
+    { id: 'combat', label: 'Combat assist', items: combat },
+    { id: 'utility', label: 'Control & UI', items: utility },
+  ].filter((col) => col.items.length > 0);
+}
+
+const {
+  product,
+  variant = 'teaser',
+  manifestFeatures = product.fullFeatures,
+  showViewStore = variant === 'teaser',
+} = Astro.props;
+
+const plans = getProductPlans(product.slug);
+const monthly = plans.find((p) => p.id === 'monthly')!;
+const lifetime = plans.find((p) => p.id === 'lifetime')!;
+const preview = product.images[0] ?? product.images[1];
+const defaultPlanId: ProductPlanId = 'lifetime';
+const loadout = groupLoadout(manifestFeatures);
+const moduleCount = manifestFeatures.length;
+
+const passPerks: Record<ProductPlanId, string> = {
+  monthly: 'Try every module for 30 days — renew only if Evrima stays your branch.',
+  lifetime: 'One charge, same manifest — built for long Evrima seasons.',
+};
+
+const marqueeItems = ['Evrima live', 'Windows PC', 'ESP · Radar', 'USD checkout', '15+ modules', product.badge];
+---
+
+<div class="store-catalog" data-store-catalog={variant}>
+  <div class="launch-deck" data-launch-deck>
+    <div class="launch-deck__ambient" aria-hidden="true"></div>
+    <div class="launch-deck__shell">
+      <div class="launch-deck__marquee" aria-hidden="true">
+        <div class="launch-deck__marquee-track">
+          {[...marqueeItems, ...marqueeItems].map((item) => (
+            <span>{item}</span>
+          ))}
+        </div>
+      </div>
+
+      <div class="launch-deck__pad">
+        <div class="launch-deck__hero">
+          <div class="launch-deck__stage">
+            <div class="launch-deck__stage-inner" data-tilt-inner>
+              {
+                preview && (
+                  <div class="launch-deck__stage-frame">
+                    <ResponsiveImage
+                      src={preview.src}
+                      alt={preview.alt}
+                      width={1280}
+                      height={800}
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                    />
+                    <div class="launch-deck__stage-glare" aria-hidden="true"></div>
+                  </div>
+                )
+              }
+            </div>
+            <div class="launch-deck__stage-footer">
+              <div class="launch-deck__stat">
+                <strong>{formatPlanPrice(monthly.priceUsd)}</strong>
+                <span>Monthly</span>
+              </div>
+              <div class="launch-deck__stat">
+                <strong>{formatPlanPrice(lifetime.priceUsd)}</strong>
+                <span>Lifetime</span>
+              </div>
+              <div class="launch-deck__stat">
+                <strong>{moduleCount}+</strong>
+                <span>Modules</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="launch-deck__copy">
+            <h3>{product.title}</h3>
+            <p>{product.desc}</p>
+
+            <div
+              class="launch-deck__duel"
+              role="group"
+              aria-label="Choose plan pass"
+              data-deck-passes
+              data-default-plan={defaultPlanId}
+              data-buy-base={product.buyUrl}
+            >
+              <button
+                type="button"
+                class="deck-pass"
+                data-plan-id="monthly"
+                aria-pressed="false"
+              >
+                <span class="deck-pass__tier">Flex pass</span>
+                <span class="deck-pass__price">{formatPlanPrice(monthly.priceUsd)}</span>
+                <span class="deck-pass__note">{monthly.priceNote}</span>
+                <span class="deck-pass__perk">{passPerks.monthly}</span>
+              </button>
+
+              <div class="launch-deck__vs" aria-hidden="true">
+                VS
+              </div>
+
+              <button
+                type="button"
+                class="deck-pass deck-pass--legendary is-selected"
+                data-plan-id="lifetime"
+                aria-pressed="true"
+              >
+                <span class="deck-pass__ribbon">Legendary</span>
+                <span class="deck-pass__tier">Lifetime pass</span>
+                <span class="deck-pass__price">{formatPlanPrice(lifetime.priceUsd)}</span>
+                <span class="deck-pass__note">{lifetime.priceNote}</span>
+                <span class="deck-pass__perk">{passPerks.lifetime}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="launch-deck__command"
+          data-command-bar
+          data-plans={JSON.stringify(plans)}
+        >
+          <div
+            class="launch-deck__segment"
+            role="tablist"
+            aria-label="Plan duration"
+            data-plan-tabs
+          >
+            <button type="button" role="tab" data-plan-tab="monthly" aria-selected="false">
+              Monthly
+            </button>
+            <button type="button" role="tab" data-plan-tab="lifetime" aria-selected="true">
+              Lifetime
+            </button>
+          </div>
+
+          <div class="launch-deck__command-main">
+            <div>
+              <p class="launch-deck__command-price" data-command-price>
+                {formatPlanPrice(lifetime.priceUsd)}
+              </p>
+              <p class="launch-deck__command-note" data-command-note>
+                {lifetime.priceNote} · {passPerks.lifetime}
+              </p>
+            </div>
+            <Button
+              as="a"
+              href={checkoutUrlWithPlan(product.buyUrl, defaultPlanId)}
+              variant="primary"
+              size="lg"
+              class="rounded-xl px-8 shadow-lg shadow-primary/25"
+              data-command-checkout
+            >
+              Launch checkout
+              <Icon name="arrowRight" size={18} />
+            </Button>
+          </div>
+        </div>
+
+        {
+          showViewStore && (
+            <div class="launch-deck__store-links">
+              <Button as="a" href={ROUTES.store} variant="outline" size="sm" class="rounded-lg">
+                Full store page
+              </Button>
+              <Button as="a" href={ROUTES.features} variant="ghost" size="sm" class="rounded-lg text-primary">
+                Feature deep-dive
+              </Button>
+            </div>
+          )
+        }
+
+        <div class="launch-deck__loadout">
+          <div class="launch-deck__loadout-head">
+            <h4>Loadout manifest</h4>
+            <Button as="a" href={ROUTES.features} variant="ghost" size="sm" class="h-auto px-0 text-primary">
+              All capabilities →
+            </Button>
+          </div>
+          <div class="launch-deck__loadout-grid">
+            {
+              loadout.map((col) => (
+                <div class="loadout-col">
+                  <h5>{col.label}</h5>
+                  <ul>
+                    {col.items.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const planCopy: Record<string, { note: string; perk: string }> = {
+    monthly: {
+      note: 'USD / month',
+      perk: 'Try every module for 30 days — renew only if Evrima stays your branch.',
+    },
+    lifetime: {
+      note: 'USD · one-time',
+      perk: 'One charge, same manifest — built for long Evrima seasons.',
+    },
+  };
+
+  const initLaunchDeck = () => {
+    document.querySelectorAll('[data-launch-deck]').forEach((deck) => {
+      if (deck.hasAttribute('data-launch-bound')) return;
+      deck.setAttribute('data-launch-bound', '');
+
+      const passRoot = deck.querySelector('[data-deck-passes]');
+      const commandBar = deck.querySelector('[data-command-bar]');
+      if (!passRoot || !commandBar) return;
+
+      const buyBase = passRoot.getAttribute('data-buy-base') ?? '';
+      const defaultPlan = passRoot.getAttribute('data-default-plan') ?? 'lifetime';
+      const passes = passRoot.querySelectorAll<HTMLButtonElement>('[data-plan-id]');
+      const tabs = commandBar.querySelectorAll<HTMLButtonElement>('[data-plan-tab]');
+      const priceEl = commandBar.querySelector('[data-command-price]');
+      const noteEl = commandBar.querySelector('[data-command-note]');
+      const checkoutEl = commandBar.querySelector<HTMLAnchorElement>('[data-command-checkout]');
+
+      let plans: { id: string; priceUsd: number; priceNote: string }[] = [];
+      try {
+        plans = JSON.parse(commandBar.getAttribute('data-plans') ?? '[]');
+      } catch {
+        return;
+      }
+
+      const checkoutHref = (planId: string) => {
+        const base = buyBase.endsWith('/') ? buyBase : `${buyBase}/`;
+        return `${base}${planId}/`;
+      };
+
+      const selectPlan = (planId: string) => {
+        const plan = plans.find((p) => p.id === planId) ?? plans[0];
+        if (!plan) return;
+
+        passes.forEach((pass) => {
+          const active = pass.getAttribute('data-plan-id') === planId;
+          pass.classList.toggle('is-selected', active);
+          pass.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+
+        tabs.forEach((tab) => {
+          const active = tab.getAttribute('data-plan-tab') === planId;
+          tab.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+
+        if (priceEl) priceEl.textContent = `$${plan.priceUsd}`;
+        if (noteEl) {
+          const extra = planCopy[planId]?.perk ?? plan.priceNote;
+          noteEl.textContent = `${plan.priceNote} · ${extra}`;
+        }
+        if (checkoutEl) checkoutEl.href = checkoutHref(planId);
+      };
+
+      passes.forEach((pass) => {
+        pass.addEventListener('click', () => {
+          const id = pass.getAttribute('data-plan-id');
+          if (id) selectPlan(id);
+        });
+      });
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const id = tab.getAttribute('data-plan-tab');
+          if (id) selectPlan(id);
+        });
+      });
+
+      selectPlan(defaultPlan);
+
+      const tiltInner = deck.querySelector<HTMLElement>('[data-tilt-inner]');
+      const stage = deck.querySelector<HTMLElement>('.launch-deck__stage');
+      if (tiltInner && stage && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const onMove = (e: PointerEvent) => {
+          const rect = stage.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          tiltInner.style.transform = `rotateY(${x * 10}deg) rotateX(${y * -8}deg)`;
+        };
+        const reset = () => {
+          tiltInner.style.transform = 'rotateY(0deg) rotateX(0deg)';
+        };
+        stage.addEventListener('pointermove', onMove);
+        stage.addEventListener('pointerleave', reset);
+      }
+    });
+  };
+
+  initLaunchDeck();
+  document.addEventListener('astro:after-swap', initLaunchDeck);
+</script>
