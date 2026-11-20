@@ -10,7 +10,7 @@ npm run build
 npm run deploy
 ```
 
-`wrangler.jsonc` includes `account_id` for non-interactive deploys.
+For **local** `wrangler deploy`, authenticate with `wrangler login` or set `CLOUDFLARE_ACCOUNT_ID` (Workers Builds sets this automatically; do not hardcode `account_id` in `wrangler.jsonc`).
 
 ## Cloudflare Workers Builds (Git)
 
