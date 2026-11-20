@@ -12,7 +12,7 @@
     "start": "node scripts/serve.mjs",
     "astro": "astro",
     "optimize:images": "node scripts/optimize-images.mjs",
-    "deploy": "wrangler deploy"
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

@@ -12,6 +12,21 @@ npm run deploy
 
 `wrangler.jsonc` includes `account_id` for non-interactive deploys.
 
+## Cloudflare Workers Builds (Git)
+
+The Worker serves static files from **`dist/`** (Astro `npm run build`). Wrangler deploy alone will fail if `dist` was not created first.
+
+In **Workers & Pages → your Worker → Settings → Builds**, use **one** of these setups:
+
+| Approach | Build command | Deploy command |
+|----------|---------------|----------------|
+| **Recommended** | *(leave empty)* | `npm run deploy` |
+| Two-step | `npm run build` | `npx wrangler deploy` |
+
+Set **Node** to **22.12+** (see `.node-version`).
+
+`wrangler.jsonc` sets `"build": { "command": "npm run build" }` so **`npx wrangler deploy`** still creates `dist/` before assets upload (no separate Cloudflare build step required).
+
 ## Cloudflare Pages (Git builds)
 
 If the Pages project uses a **Deploy command**, set:
